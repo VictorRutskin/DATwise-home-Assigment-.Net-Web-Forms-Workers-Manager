@@ -13,5 +13,6 @@ namespace DAL___Data_Access_Layer.Models
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
+        public DateTime HireDate { get; set; }
     }
 }

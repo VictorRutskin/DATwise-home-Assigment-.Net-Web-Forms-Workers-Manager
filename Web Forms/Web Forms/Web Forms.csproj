@@ -102,8 +102,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\navbar.css" />
+    <Content Include="Content\_footer.css" />
+    <Content Include="Content\_navbar.css" />
+    <Content Include="Content\_default.css" />
+    <Content Include="Content\_variables.css" />
     <Content Include="Global.asax" />
+    <Content Include="Media\home video.mp4" />
+    <Content Include="Media\office.mp4" />
+    <Content Include="Media\WorkWISE full.png" />
+    <Content Include="Media\WorkWISE Icon.png" />
+    <Content Include="Media\WorkWISE.ico" />
+    <Content Include="Media\WorkWISE.png" />
     <Content Include="Pages\About.aspx" />
     <Content Include="Pages\Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -122,11 +131,12 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\_Site.css" />
     <Content Include="Pages\Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Pages\EmployeesForm.aspx" />
     <Content Include="Pages\EmployeesList.aspx" />
+    <Content Include="UserControls\Footer.ascx" />
     <Content Include="UserControls\Navbar.ascx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -229,6 +239,13 @@
     </Compile>
     <Compile Include="Pages\EmployeesList.aspx.designer.cs">
       <DependentUpon>EmployeesList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Footer.ascx.cs">
+      <DependentUpon>Footer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Footer.ascx.designer.cs">
+      <DependentUpon>Footer.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Navbar.ascx.cs">
       <DependentUpon>Navbar.ascx</DependentUpon>

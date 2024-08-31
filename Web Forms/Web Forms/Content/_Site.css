@@ -1,0 +1,120 @@
+﻿@import url('_variables.css');
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-bright);
+    margin: 0;
+    padding: 20px;
+    color: var(--color-dark);
+    overflow: hidden;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    background-color: var(--color-bright);
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+h1 {
+    text-align: center;
+    color: var(--color-medium-dark);
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid var(--color-dark);
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+        border-color: var(--color-medium-bright);
+        outline: none;
+        box-shadow: 0 0 5px rgba(212, 44, 76, 0.5);
+    }
+
+#btnSave {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: var(--color-medium-bright);
+    color: var(--color-bright);
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    #btnSave:hover {
+        background-color: var(--color-dark);
+    }
+
+#hlAddEmployee {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: var(--color-medium-bright);
+    color: var(--color-bright);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+    #hlAddEmployee:hover {
+        background-color: var(--color-dark);
+    }
+
+#gvEmployees {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+    #gvEmployees th,
+    #gvEmployees td {
+        border: 1px solid var(--color-dark);
+        padding: 12px;
+        text-align: left;
+        font-size: 0.9rem;
+    }
+
+    #gvEmployees th {
+        background-color: var(--color-medium-bright);
+        color: var(--color-bright);
+        font-weight: 600;
+    }
+
+    #gvEmployees tr:nth-child(even) {
+        background-color: var(--color-bright);
+    }
+
+    #gvEmployees tr:hover {
+        background-color: var(--color-medium-dark);
+    }
+
+.action-link {
+    color: var(--color-medium-bright);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+    .action-link:hover {
+        text-decoration: underline;
+    }

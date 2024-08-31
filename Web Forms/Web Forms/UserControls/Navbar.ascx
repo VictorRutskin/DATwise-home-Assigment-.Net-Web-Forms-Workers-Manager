@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Navbar.ascx.cs" Inherits="Web_Forms.UserControls.Navbar" %>
 
-<link href="<%= ResolveUrl("~/Content/navbar.css") %>" rel="stylesheet" type="text/css" />
+<link href="<%= ResolveUrl("~/Content/_navbar.css") %>" rel="stylesheet" type="text/css" />
 
 <div class="navbar">
     <ul>

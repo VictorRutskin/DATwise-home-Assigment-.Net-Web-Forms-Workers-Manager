@@ -2,7 +2,6 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-        <div class="container">
             <h1>Employee List</h1>
 
             <asp:HyperLink ID="hlAddEmployee" runat="server" NavigateUrl="EmployeeForm.aspx">Add New Employee</asp:HyperLink>
@@ -24,6 +23,5 @@
                     <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
                 </Columns>
             </asp:GridView>
-        </div>
 </asp:Content>
 
