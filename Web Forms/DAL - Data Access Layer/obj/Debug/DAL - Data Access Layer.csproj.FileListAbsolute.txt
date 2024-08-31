@@ -1,9 +1,0 @@
-D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\DAL - Data Access Layer\bin\Debug\DAL - Data Access Layer.dll
-D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\DAL - Data Access Layer\bin\Debug\DAL - Data Access Layer.pdb
-D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\DAL - Data Access Layer\bin\Debug\Common.dll
-D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\DAL - Data Access Layer\bin\Debug\Common.pdb
-D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\DAL - Data Access Layer\obj\Debug\DAL - Data Access Layer.csproj.AssemblyReference.cache
-D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\DAL - Data Access Layer\obj\Debug\DAL - Data Access Layer.csproj.CoreCompileInputs.cache
-D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\DAL - Data Access Layer\obj\Debug\DAL - Data Access Layer.csproj.CopyComplete
-D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\DAL - Data Access Layer\obj\Debug\DAL - Data Access Layer.dll
-D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\DAL - Data Access Layer\obj\Debug\DAL - Data Access Layer.pdb
