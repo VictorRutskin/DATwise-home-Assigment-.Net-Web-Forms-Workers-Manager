@@ -15,22 +15,7 @@ namespace Web_Forms
 
         void Application_Start(object sender, EventArgs e)
         {
-
-
-            // Default 
-            RouteTable.Routes.MapPageRoute("DefaultRoute", "", $"{baseUrl}/Default.aspx");
-            // About 
-            RouteTable.Routes.MapPageRoute("AboutRoute", "About", $"{baseUrl}/About.aspx");
-            // Contact 
-            RouteTable.Routes.MapPageRoute("ContactRoute", "Contact", $"{baseUrl}/Contact.aspx");
-            // EmployeesForm 
-            RouteTable.Routes.MapPageRoute("EmployeesFormRoute", "EmployeesForm", $"{baseUrl}/EmployeesForm.aspx");
-            // EmployeesList 
-            RouteTable.Routes.MapPageRoute("EmployeesListRoute", "EmployeesList", $"{baseUrl}/EmployeesList.aspx");
-
-
-            // Invalid URLs (catches all the leftovers)
-            RouteTable.Routes.MapPageRoute("InvalidRoutes", "{*url}", $"{baseUrl}/Default.aspx");
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
 
     }

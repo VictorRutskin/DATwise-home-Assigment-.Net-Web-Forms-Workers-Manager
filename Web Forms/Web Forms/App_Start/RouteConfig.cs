@@ -12,6 +12,46 @@ namespace Web_Forms
         {
             var settings = new FriendlyUrlSettings();
             settings.AutoRedirectMode = RedirectMode.Permanent;
+            string baseUrl = "~/Pages";
+
+            // Default 
+            routes.MapPageRoute(
+                "DefaultRoute", // routeName
+                "", // routeUrl
+                $"{baseUrl}/Default.aspx" // file location
+            );
+            // About 
+            routes.MapPageRoute(
+                "AboutRoute",
+                "About",
+                $"{baseUrl}/About.aspx"
+            );
+            // Contact 
+            routes.MapPageRoute(
+                "ContactRoute",
+                "Contact",
+                 $"{baseUrl}/Contact.aspx"
+            );
+            // EmployeeForm 
+            routes.MapPageRoute(
+                "EmployeesFormRoute",
+                "EmployeesForm",
+                 $"{baseUrl}/EmployeesForm.aspx"
+            );
+            // EmployeeList 
+            routes.MapPageRoute(
+                "EmployeesListRoute",
+                "EmployeesList",
+                 $"{baseUrl}/EmployeesList.aspx"
+            );
+
+            //  Invalid URLs (catches all the leftovers)
+            routes.MapPageRoute(
+                "InvalidRoutes",
+                "{*url}",
+                "~/Pages/Default.aspx"
+            );
+
             routes.EnableFriendlyUrls(settings);
         }
     }
