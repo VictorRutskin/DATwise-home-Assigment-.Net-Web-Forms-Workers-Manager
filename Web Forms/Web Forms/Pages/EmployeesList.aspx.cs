@@ -42,27 +42,38 @@ namespace Web_Forms.Pages
         {
             GridViewRow row = gvEmployees.Rows[e.RowIndex];
             int employeeId = Convert.ToInt32(gvEmployees.DataKeys[e.RowIndex].Values[0]);
-            string firstName = (row.FindControl("FirstName") as TextBox).Text;
-            string lastName = (row.FindControl("LastName") as TextBox).Text;
-            string email = (row.FindControl("Email") as TextBox).Text;
-            string phone = (row.FindControl("Phone") as TextBox).Text;
-            DateTime hireDate = DateTime.Parse((row.FindControl("HireDate") as TextBox).Text); 
 
-            Employee employee = new Employee
+            TextBox txtFirstName = row.FindControl("txtFirstName") as TextBox;
+            TextBox txtLastName = row.FindControl("txtLastName") as TextBox;
+            TextBox txtEmail = row.FindControl("txtEmail") as TextBox;
+            TextBox txtPhone = row.FindControl("txtPhone") as TextBox;
+            TextBox txtHireDate = row.FindControl("txtHireDate") as TextBox;
+
+            if (txtFirstName != null && txtLastName != null && txtEmail != null && txtPhone != null && txtHireDate != null)
             {
-                EmployeeID = employeeId,
-                FirstName = firstName,
-                LastName = lastName,
-                Email = email,
-                Phone = phone,
-                HireDate = hireDate 
-            };
+                string firstName = txtFirstName.Text;
+                string lastName = txtLastName.Text;
+                string email = txtEmail.Text;
+                string phone = txtPhone.Text;
+                DateTime hireDate = DateTime.Parse(txtHireDate.Text);
 
-            await _employeeBL.UpdateEmployee(employee);
+                Employee employee = new Employee
+                {
+                    EmployeeID = employeeId,
+                    FirstName = firstName,
+                    LastName = lastName,
+                    Email = email,
+                    Phone = phone,
+                    HireDate = hireDate
+                };
 
-            gvEmployees.EditIndex = -1;
-            await LoadEmployeesAsync(); 
+                await _employeeBL.UpdateEmployee(employee);
+
+                gvEmployees.EditIndex = -1;
+                await LoadEmployeesAsync();
+            }
         }
+
 
         protected async void gvEmployees_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
