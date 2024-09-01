@@ -16,8 +16,8 @@ footer {
     display: flex;
     flex-direction: column; 
     align-items: center;
-    background-color: var(--color-dark);
-    color: var(--color-bright);
+    background-color: var(--color-brown);
+    color: var(--color-white);
     width: 100%;
     margin-top: auto;
     padding: 10px 20px;
@@ -30,35 +30,12 @@ footer {
     }
 
     footer a {
-        color: var(--color-medium-bright);
+        color: var(--color-purple);
         text-decoration: none;
         font-weight: bold;
     }
 
         footer a:hover {
-            color: var(--color-medium);
+            color: var(--color-skin);
         }
 
-    footer .social-links {
-        margin-top: 10px;
-    }
-
-        footer .social-links a {
-            margin: 0 15px;
-            display: inline-block;
-            font-size: 1.5em;
-            transition: color 0.3s ease;
-        }
-
-            footer .social-links a:hover {
-                color: var(--color-medium);
-            }
-
-    footer .contact-info {
-        margin-top: 10px;
-        font-size: 0.9em;
-    }
-
-        footer .contact-info p {
-            margin: 0;
-        }

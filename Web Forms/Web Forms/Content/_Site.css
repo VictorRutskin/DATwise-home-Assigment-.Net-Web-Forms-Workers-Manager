@@ -2,17 +2,17 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--color-bright);
+    background-color: var(--color-white);
     margin: 0;
     padding: 20px;
-    color: var(--color-dark);
+    color: var(--color-brown);
     overflow: hidden;
 }
 
 .container {
     max-width: 1000px;
     margin: auto;
-    background-color: var(--color-bright);
+    background-color: var(--color-white);
     padding: 30px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
@@ -20,7 +20,7 @@ body {
 
 h1 {
     text-align: center;
-    color: var(--color-medium-dark);
+    color: var(--color-orange);
     font-size: 2rem;
     margin-bottom: 20px;
 }
@@ -34,7 +34,7 @@ textarea {
     margin-top: 5px;
     margin-bottom: 20px;
     border-radius: 5px;
-    border: 1px solid var(--color-dark);
+    border: 1px solid var(--color-brown);
     box-sizing: border-box;
     font-size: 1rem;
 }
@@ -42,7 +42,7 @@ textarea {
     input:focus,
     select:focus,
     textarea:focus {
-        border-color: var(--color-medium-bright);
+        border-color: var(--color-purple);
         outline: none;
         box-shadow: 0 0 5px rgba(212, 44, 76, 0.5);
     }
@@ -51,8 +51,8 @@ textarea {
     display: block;
     width: 100%;
     padding: 12px;
-    background-color: var(--color-medium-bright);
-    color: var(--color-bright);
+    background-color: var(--color-purple);
+    color: var(--color-white);
     border: none;
     border-radius: 5px;
     font-size: 1.2rem;
@@ -61,22 +61,22 @@ textarea {
 }
 
     #btnSave:hover {
-        background-color: var(--color-dark);
+        background-color: var(--color-brown);
     }
 
 #hlAddEmployee {
     display: inline-block;
     margin-bottom: 20px;
     padding: 10px 20px;
-    background-color: var(--color-medium-bright);
-    color: var(--color-bright);
+    background-color: var(--color-purple);
+    color: var(--color-white);
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s ease;
 }
 
     #hlAddEmployee:hover {
-        background-color: var(--color-dark);
+        background-color: var(--color-brown);
     }
 
 #gvEmployees {
@@ -89,28 +89,28 @@ textarea {
 
     #gvEmployees th,
     #gvEmployees td {
-        border: 1px solid var(--color-dark);
+        border: 1px solid var(--color-brown);
         padding: 12px;
         text-align: left;
         font-size: 0.9rem;
     }
 
     #gvEmployees th {
-        background-color: var(--color-medium-bright);
-        color: var(--color-bright);
+        background-color: var(--color-purple);
+        color: var(--color-white);
         font-weight: 600;
     }
 
     #gvEmployees tr:nth-child(even) {
-        background-color: var(--color-bright);
+        background-color: var(--color-white);
     }
 
     #gvEmployees tr:hover {
-        background-color: var(--color-medium-dark);
+        background-color: var(--color-orange);
     }
 
 .action-link {
-    color: var(--color-medium-bright);
+    color: var(--color-purple);
     text-decoration: none;
     font-weight: 500;
 }

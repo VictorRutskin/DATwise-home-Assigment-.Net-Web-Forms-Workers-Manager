@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL___Data_Access_Layer.Models
+namespace DAL.Models
 {
     public class Employee
     {

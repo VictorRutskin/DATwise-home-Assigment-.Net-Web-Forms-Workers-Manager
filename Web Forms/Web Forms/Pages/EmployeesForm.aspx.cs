@@ -1,22 +1,19 @@
-﻿using BL___Bussiness_Logic;
+﻿using BL;
+using Common;
+using DAL.Models;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace Web_Forms.Pages
 {
     public partial class EmployeesForm : System.Web.UI.Page
     {
-        private EmployeeBL _employeeBL;
+        private ServiceEmployees _serviceEmployees;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["DATwiseDbConnection"].ConnectionString;
-            _employeeBL = new EmployeeBL(connectionString);
+            _serviceEmployees = new ServiceEmployees(MyConfigurationManager.GetConnectionString());
 
             if (!IsPostBack)
             {
@@ -28,31 +25,41 @@ namespace Web_Forms.Pages
             }
         }
 
-        private void LoadEmployee(int employeeId)
+        private async void LoadEmployee(int employeeId)
         {
-            _employeeBL.LoadEmployee(employeeId, out string firstName, out string lastName, out string email, out string phone, out DateTime hireDate);
-
-            txtFirstName.Text = firstName;
-            txtLastName.Text = lastName;
-            txtEmail.Text = email;
-            txtPhone.Text = phone;
-            txtHireDate.Text = hireDate.ToString("yyyy-MM-dd");
+            var employee = await _serviceEmployees.GetEmployee(employeeId);
+            if (employee != null)
+            {
+                txtFirstName.Text = employee.FirstName;
+                txtLastName.Text = employee.LastName;
+                txtEmail.Text = employee.Email;
+                txtPhone.Text = employee.Phone;
+                txtHireDate.Text = employee.HireDate.ToString("yyyy-MM-dd");
+            }
         }
 
-        protected void btnSave_Click(object sender, EventArgs e)
+        protected async void btnSave_Click(object sender, EventArgs e)
         {
-            if (Request.QueryString["EmployeeID"] != null)
+            var employee = new Employee
             {
-                int employeeId = int.Parse(Request.QueryString["EmployeeID"]);
-                _employeeBL.UpdateEmployee(employeeId, txtFirstName.Text, txtLastName.Text, txtEmail.Text, txtPhone.Text, DateTime.Parse(txtHireDate.Text));
+                EmployeeID = Request.QueryString["EmployeeID"] != null ? int.Parse(Request.QueryString["EmployeeID"]) : 0,
+                FirstName = txtFirstName.Text,
+                LastName = txtLastName.Text,
+                Email = txtEmail.Text,
+                Phone = txtPhone.Text,
+                HireDate = DateTime.Parse(txtHireDate.Text)
+            };
+
+            if (employee.EmployeeID > 0)
+            {
+                await _serviceEmployees.UpdateEmployee(employee);
             }
             else
             {
-                _employeeBL.InsertEmployee(txtFirstName.Text, txtLastName.Text, txtEmail.Text, txtPhone.Text, DateTime.Parse(txtHireDate.Text));
+                await _serviceEmployees.InsertEmployee(employee);
             }
 
             Response.Redirect("EmployeeList.aspx");
         }
-
     }
 }

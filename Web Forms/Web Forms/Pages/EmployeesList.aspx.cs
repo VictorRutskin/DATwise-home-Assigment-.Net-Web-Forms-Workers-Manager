@@ -1,10 +1,9 @@
-﻿using BL___Bussiness_Logic;
-using DAL___Data_Access_Layer.Models;
+﻿using BL;
+using DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -12,33 +11,34 @@ namespace Web_Forms.Pages
 {
     public partial class EmployeesList : System.Web.UI.Page
     {
-        private EmployeeBL _employeeBL;
+        private ServiceEmployees _employeeBL;
 
-        protected void Page_Load(object sender, EventArgs e)
+        protected async void Page_Load(object sender, EventArgs e)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["DATwiseDbConnection"].ConnectionString;
-            _employeeBL = new EmployeeBL(connectionString);
+            _employeeBL = new ServiceEmployees(connectionString);
 
             if (!IsPostBack)
             {
-                LoadEmployees();
+                await LoadEmployeesAsync();
             }
         }
 
-        private void LoadEmployees()
+
+        private async Task LoadEmployeesAsync()
         {
-            List<Employee> employees = _employeeBL.GetAllEmployees();
+            List<Employee> employees = await _employeeBL.GetEmployees();
             gvEmployees.DataSource = employees;
             gvEmployees.DataBind();
         }
 
-        protected void gvEmployees_RowEditing(object sender, GridViewEditEventArgs e)
+        protected async void gvEmployees_RowEditing(object sender, GridViewEditEventArgs e)
         {
             gvEmployees.EditIndex = e.NewEditIndex;
-            LoadEmployees();
+            await LoadEmployeesAsync(); 
         }
 
-        protected void gvEmployees_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        protected async void gvEmployees_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             GridViewRow row = gvEmployees.Rows[e.RowIndex];
             int employeeId = Convert.ToInt32(gvEmployees.DataKeys[e.RowIndex].Values[0]);
@@ -46,6 +46,7 @@ namespace Web_Forms.Pages
             string lastName = (row.FindControl("LastName") as TextBox).Text;
             string email = (row.FindControl("Email") as TextBox).Text;
             string phone = (row.FindControl("Phone") as TextBox).Text;
+            DateTime hireDate = DateTime.Parse((row.FindControl("HireDate") as TextBox).Text); 
 
             Employee employee = new Employee
             {
@@ -53,26 +54,27 @@ namespace Web_Forms.Pages
                 FirstName = firstName,
                 LastName = lastName,
                 Email = email,
-                Phone = phone
+                Phone = phone,
+                HireDate = hireDate 
             };
 
-            _employeeBL.UpdateEmployee(employee);
+            await _employeeBL.UpdateEmployee(employee);
 
             gvEmployees.EditIndex = -1;
-            LoadEmployees();
+            await LoadEmployeesAsync(); 
         }
 
-        protected void gvEmployees_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        protected async void gvEmployees_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             int employeeId = Convert.ToInt32(gvEmployees.DataKeys[e.RowIndex].Values[0]);
-            _employeeBL.DeleteEmployee(employeeId);
-            LoadEmployees();
+            await _employeeBL.DeleteEmployee(employeeId);
+            await LoadEmployeesAsync(); 
         }
 
-        protected void gvEmployees_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        protected async void gvEmployees_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gvEmployees.EditIndex = -1;
-            LoadEmployees();
+            await LoadEmployeesAsync(); 
         }
     }
 }

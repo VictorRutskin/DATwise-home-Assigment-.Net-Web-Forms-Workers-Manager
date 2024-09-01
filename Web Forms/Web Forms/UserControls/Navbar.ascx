@@ -2,12 +2,10 @@
 
 <link href="<%= ResolveUrl("~/Content/_navbar.css") %>" rel="stylesheet" type="text/css" />
 
-<div class="navbar">
-    <ul>
-        <li><a href="/"> Home </a></li>
-        <li><a href="EmployeesList"> Employee List </a></li>
-        <li><a href="EmployeesForm"> Employee Form </a></li>
-        <li><a href="About"> About </a></li>
-        <li><a href="Contact"> Contact </a></li>
-    </ul>
+<div class="menu-bar">
+    <a href="/" class="menu-item">Home</a>
+    <a href="EmployeesList" class="menu-item">Employee List</a>
+    <a href="EmployeesForm" class="menu-item">Employee Form</a>
+    <a href="About" class="menu-item">About</a>
+    <a href="Contact" class="menu-item">Contact</a>
 </div>

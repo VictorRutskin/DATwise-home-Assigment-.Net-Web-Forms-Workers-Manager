@@ -5,9 +5,9 @@ VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web Forms", "Web Forms\Web Forms.csproj", "{4E1A23AF-F318-4F3D-85FE-AC3274DFB635}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL - Data Access Layer", "DAL - Data Access Layer\DAL - Data Access Layer.csproj", "{7BC8E701-1A9D-4312-B51F-5CBA4218AF04}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL-Data Access Layer", "DAL - Data Access Layer\DAL-Data Access Layer.csproj", "{7BC8E701-1A9D-4312-B51F-5CBA4218AF04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL - Bussiness Logic", "BL - Bussiness Logic\BL - Bussiness Logic.csproj", "{FBF3859C-E0CF-4AC0-9475-F1760D03C877}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL-Bussiness Logic", "BL - Bussiness Logic\BL-Bussiness Logic.csproj", "{FBF3859C-E0CF-4AC0-9475-F1760D03C877}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{339CC147-7452-48A1-B633-0E348B453D6B}"
 EndProject
