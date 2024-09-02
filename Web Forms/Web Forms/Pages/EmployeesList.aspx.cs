@@ -3,9 +3,11 @@ using DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Web_Forms.UserControls;
 
 namespace Web_Forms.Pages
 {
@@ -22,20 +24,45 @@ namespace Web_Forms.Pages
             {
                 await LoadEmployeesAsync();
             }
-        }
 
+            // Register the event handler for the AdvancedSearch control
+            AdvancedSearchControl.SearchClicked += OnSearchClicked;
+        }
 
         private async Task LoadEmployeesAsync()
         {
             List<Employee> employees = await _employeeBL.GetEmployees();
+            ViewState["Employees"] = employees; // Store the data
+            BindEmployeesToGrid(employees);
+        }
+
+        private void BindEmployeesToGrid(List<Employee> employees)
+        {
             gvEmployees.DataSource = employees;
             gvEmployees.DataBind();
+        }
+
+        protected void OnSearchClicked(object sender, Dictionary<string, string> searchTerms)
+        {
+            List<Employee> employees = ViewState["Employees"] as List<Employee>;
+
+            if (employees != null)
+            {
+                var filteredEmployees = employees.Where(emp =>
+                    (string.IsNullOrEmpty(searchTerms["FirstName"]) || emp.FirstName.ToLower().Contains(searchTerms["FirstName"].ToLower())) &&
+                    (string.IsNullOrEmpty(searchTerms["LastName"]) || emp.LastName.ToLower().Contains(searchTerms["LastName"].ToLower())) &&
+                    (string.IsNullOrEmpty(searchTerms["Email"]) || emp.Email.ToLower().Contains(searchTerms["Email"].ToLower())) &&
+                    (string.IsNullOrEmpty(searchTerms["Phone"]) || emp.Phone.ToLower().Contains(searchTerms["Phone"].ToLower()))
+                ).ToList();
+
+                BindEmployeesToGrid(filteredEmployees);
+            }
         }
 
         protected async void gvEmployees_RowEditing(object sender, GridViewEditEventArgs e)
         {
             gvEmployees.EditIndex = e.NewEditIndex;
-            await LoadEmployeesAsync(); 
+            await LoadEmployeesAsync();
         }
 
         protected async void gvEmployees_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -74,18 +101,17 @@ namespace Web_Forms.Pages
             }
         }
 
-
         protected async void gvEmployees_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             int employeeId = Convert.ToInt32(gvEmployees.DataKeys[e.RowIndex].Values[0]);
             await _employeeBL.DeleteEmployee(employeeId);
-            await LoadEmployeesAsync(); 
+            await LoadEmployeesAsync();
         }
 
         protected async void gvEmployees_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gvEmployees.EditIndex = -1;
-            await LoadEmployeesAsync(); 
+            await LoadEmployeesAsync();
         }
     }
 }

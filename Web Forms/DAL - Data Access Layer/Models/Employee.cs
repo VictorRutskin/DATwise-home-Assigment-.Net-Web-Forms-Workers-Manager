@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Models
 {
+    [Serializable]  
     public class Employee
     {
         public int EmployeeID { get; set; }

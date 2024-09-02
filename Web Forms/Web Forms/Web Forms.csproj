@@ -210,6 +210,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\_advanced-search.css" />
     <Content Include="Content\_paper-button.css" />
     <Content Include="Content\_footer.css" />
     <Content Include="Content\_navbar.css" />
@@ -246,6 +247,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Pages\EmployeesForm.aspx" />
     <Content Include="Pages\EmployeesList.aspx" />
+    <Content Include="UserControls\AdvancedSearch.ascx" />
     <Content Include="UserControls\Footer.ascx" />
     <Content Include="UserControls\Navbar.ascx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -350,6 +352,13 @@
     </Compile>
     <Compile Include="Pages\EmployeesList.aspx.designer.cs">
       <DependentUpon>EmployeesList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AdvancedSearch.ascx.cs">
+      <DependentUpon>AdvancedSearch.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\AdvancedSearch.ascx.designer.cs">
+      <DependentUpon>AdvancedSearch.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Footer.ascx.cs">
       <DependentUpon>Footer.ascx</DependentUpon>

@@ -15,13 +15,13 @@ namespace Web_Forms.Pages
     {
 
         /// <summary>
-        /// hlAddEmployee control.
+        /// AdvancedSearchControl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hlAddEmployee;
+        protected global::Web_Forms.UserControls.AdvancedSearch AdvancedSearchControl;
 
         /// <summary>
         /// gvEmployees control.
@@ -31,5 +31,14 @@ namespace Web_Forms.Pages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvEmployees;
+
+        /// <summary>
+        /// hlAddEmployee control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hlAddEmployee;
     }
 }
