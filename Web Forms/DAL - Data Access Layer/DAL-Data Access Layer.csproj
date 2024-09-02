@@ -110,6 +110,7 @@
     <Compile Include="Interfaces\ILogManager.cs" />
     <Compile Include="Managers\LogManager.cs" />
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\PopupType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

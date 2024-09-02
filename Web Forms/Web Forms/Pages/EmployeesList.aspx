@@ -1,11 +1,15 @@
 ﻿<%@ Page Title="EmployeesList" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EmployeesList.aspx.cs" Inherits="Web_Forms.Pages.EmployeesList" Async="true" %>
-<%@ Register TagPrefix="uc1" TagName="AdvancedSearch" Src="~/UserControls/AdvancedSearch.ascx" %>
+<%@ Register TagPrefix="uc" TagName="AdvancedSearch" Src="~/UserControls/AdvancedSearch.ascx" %>
+<%@ Register TagPrefix="uc" TagName="Popup" Src="~/UserControls/Popup.ascx" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+
+    <uc:Popup ID="PopupControl" runat="server" />
+
     <h1>Employee List</h1>
 
     <!-- Search Controls -->
-    <uc1:AdvancedSearch ID="AdvancedSearchControl" runat="server" />
+    <uc:AdvancedSearch ID="AdvancedSearchControl" runat="server" />
 
     <!-- SqlDataSource -->
     <asp:SqlDataSource ID="SqlDataSource1" runat="server"

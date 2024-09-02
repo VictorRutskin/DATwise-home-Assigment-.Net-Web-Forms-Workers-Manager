@@ -15,6 +15,15 @@ namespace Web_Forms.Pages
     {
 
         /// <summary>
+        /// PopupControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Web_Forms.UserControls.Popup PopupControl;
+
+        /// <summary>
         /// lblFirstName control.
         /// </summary>
         /// <remarks>

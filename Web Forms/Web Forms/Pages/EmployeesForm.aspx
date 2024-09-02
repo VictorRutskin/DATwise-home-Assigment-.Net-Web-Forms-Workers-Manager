@@ -1,6 +1,10 @@
 ﻿<%@ Page Title="EmployeesForm" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EmployeesForm.aspx.cs" Inherits="Web_Forms.Pages.EmployeesForm" Async="true" %>
+<%@ Register TagPrefix="uc" TagName="Popup" Src="~/UserControls/Popup.ascx" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+        <uc:Popup ID="PopupControl" runat="server" />
+
     <h1>Employee Form</h1>
 
     <asp:Label ID="lblFirstName" runat="server" Text="First Name:" AssociatedControlID="txtFirstName" />

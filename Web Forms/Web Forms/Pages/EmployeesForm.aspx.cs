@@ -1,36 +1,70 @@
-﻿using Common.ValidationHandler;
-using System;
+﻿using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Common.CustomExceptions;
+using Common.ConfigurationHandler; // Make sure this namespace is included
+using Common.ValidationHandler;
+using DAL_Data_Access_Layer.Models;
 
 namespace Web_Forms.Pages
 {
     public partial class EmployeesForm : System.Web.UI.Page
     {
+        private ILoggerService _loggerService;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            _loggerService = new LoggerService(Server.MapPath(ConfigurationHandler.GetLogFilePath()));
+
             if (!IsPostBack)
             {
                 if (Request.QueryString["EmployeeID"] != null)
                 {
-                    int employeeId = int.Parse(Request.QueryString["EmployeeID"]);
-                    LoadEmployee(employeeId);
+                    int employeeId;
+                    if (int.TryParse(Request.QueryString["EmployeeID"], out employeeId))
+                    {
+                        try
+                        {
+                            LoadEmployee(employeeId);
+                        }
+                        catch (Exception ex)
+                        {
+                            _loggerService.LogError(new NotFoundInDbException("Failed to load employee.", _loggerService));
+                            PopupControl.Show(PopupType.Error, "Error", "An error occurred while loading the employee data.");
+                        }
+                    }
+                    else
+                    {
+                        PopupControl.Show(PopupType.Error, "Error", "Invalid Employee ID.");
+                    }
                 }
             }
         }
 
         private void LoadEmployee(int employeeId)
         {
-            SqlDataSource1.SelectParameters["EmployeeID"].DefaultValue = employeeId.ToString();
-            var employee = SqlDataSource1.Select(DataSourceSelectArguments.Empty) as System.Data.DataView;
-            if (employee != null && employee.Count > 0)
+            try
             {
-                var row = employee[0];
-                txtFirstName.Text = row["FirstName"].ToString();
-                txtLastName.Text = row["LastName"].ToString();
-                txtEmail.Text = row["Email"].ToString();
-                txtPhone.Text = row["Phone"].ToString();
-                txtHireDate.Text = Convert.ToDateTime(row["HireDate"]).ToString("yyyy-MM-dd");
+                SqlDataSource1.SelectParameters["EmployeeID"].DefaultValue = employeeId.ToString();
+                var employee = SqlDataSource1.Select(DataSourceSelectArguments.Empty) as System.Data.DataView;
+                if (employee != null && employee.Count > 0)
+                {
+                    var row = employee[0];
+                    txtFirstName.Text = row["FirstName"].ToString();
+                    txtLastName.Text = row["LastName"].ToString();
+                    txtEmail.Text = row["Email"].ToString();
+                    txtPhone.Text = row["Phone"].ToString();
+                    txtHireDate.Text = Convert.ToDateTime(row["HireDate"]).ToString("yyyy-MM-dd");
+                }
+                else
+                {
+                    throw new NotFoundInDbException("No employee data found for the given ID.", _loggerService);
+                }
+            }
+            catch (Exception ex)
+            {
+                _loggerService.LogError(new NotFoundInDbException("Failed to load employee data.", _loggerService));
+                PopupControl.Show(PopupType.Error, "Error", "An error occurred while loading the employee data.");
             }
         }
 
@@ -78,34 +112,42 @@ namespace Web_Forms.Pages
             if (!string.IsNullOrEmpty(errorMessage))
             {
                 // Show pop-up message with error details
-                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"alert('{errorMessage}');", true);
+                PopupControl.Show(PopupType.Error, "Validation Error", errorMessage);
                 return;
             }
 
-            // Insert or Update Employee
-            SqlDataSource1.InsertParameters["FirstName"].DefaultValue = txtFirstName.Text;
-            SqlDataSource1.InsertParameters["LastName"].DefaultValue = txtLastName.Text;
-            SqlDataSource1.InsertParameters["Email"].DefaultValue = txtEmail.Text;
-            SqlDataSource1.InsertParameters["Phone"].DefaultValue = txtPhone.Text;
-            SqlDataSource1.InsertParameters["HireDate"].DefaultValue = txtHireDate.Text;
-
-            if (Request.QueryString["EmployeeID"] != null)
+            try
             {
-                SqlDataSource1.UpdateParameters["EmployeeID"].DefaultValue = Request.QueryString["EmployeeID"];
-                SqlDataSource1.UpdateParameters["FirstName"].DefaultValue = txtFirstName.Text;
-                SqlDataSource1.UpdateParameters["LastName"].DefaultValue = txtLastName.Text;
-                SqlDataSource1.UpdateParameters["Email"].DefaultValue = txtEmail.Text;
-                SqlDataSource1.UpdateParameters["Phone"].DefaultValue = txtPhone.Text;
-                SqlDataSource1.UpdateParameters["HireDate"].DefaultValue = txtHireDate.Text;
+                // Insert or Update Employee
+                SqlDataSource1.InsertParameters["FirstName"].DefaultValue = txtFirstName.Text;
+                SqlDataSource1.InsertParameters["LastName"].DefaultValue = txtLastName.Text;
+                SqlDataSource1.InsertParameters["Email"].DefaultValue = txtEmail.Text;
+                SqlDataSource1.InsertParameters["Phone"].DefaultValue = txtPhone.Text;
+                SqlDataSource1.InsertParameters["HireDate"].DefaultValue = txtHireDate.Text;
 
-                SqlDataSource1.Update();
+                if (Request.QueryString["EmployeeID"] != null)
+                {
+                    SqlDataSource1.UpdateParameters["EmployeeID"].DefaultValue = Request.QueryString["EmployeeID"];
+                    SqlDataSource1.UpdateParameters["FirstName"].DefaultValue = txtFirstName.Text;
+                    SqlDataSource1.UpdateParameters["LastName"].DefaultValue = txtLastName.Text;
+                    SqlDataSource1.UpdateParameters["Email"].DefaultValue = txtEmail.Text;
+                    SqlDataSource1.UpdateParameters["Phone"].DefaultValue = txtPhone.Text;
+                    SqlDataSource1.UpdateParameters["HireDate"].DefaultValue = txtHireDate.Text;
+
+                    SqlDataSource1.Update();
+                    PopupControl.Show(PopupType.Success, "Success", "Employee updated successfully.");
+                }
+                else
+                {
+                    SqlDataSource1.Insert();
+                    PopupControl.Show(PopupType.Success, "Success", "Employee added successfully.");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                SqlDataSource1.Insert();
+                _loggerService.LogError(new UnauthorizedUserException("Failed to save employee data.", _loggerService));
+                PopupControl.Show(PopupType.Error, "Error", "An error occurred while saving the employee data.");
             }
-
-            Response.Redirect("EmployeeList.aspx");
         }
     }
 }

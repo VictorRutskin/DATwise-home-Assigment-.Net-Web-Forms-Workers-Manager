@@ -1,0 +1,16 @@
+--------------------------------------------------
+Time: 02/09/2024 17:39:42
+Original Exception: ModelStateException
+Message: ModelStateException: Model state is invalid.
+StackTrace: 
+Database Logging Exception: Simulated database logging failure.
+--------------------------------------------------
+
+--------------------------------------------------
+Time: 02/09/2024 17:39:42
+Original Exception: ModelStateException
+Message: ModelStateException: Model state is invalid.
+StackTrace: 
+Database Logging Exception: Simulated database logging failure.
+--------------------------------------------------
+
