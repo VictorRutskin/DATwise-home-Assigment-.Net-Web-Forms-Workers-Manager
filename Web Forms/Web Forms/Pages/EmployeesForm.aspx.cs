@@ -2,9 +2,10 @@
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Common.CustomExceptions;
-using Common.ConfigurationHandler; // Make sure this namespace is included
+using Common.ConfigurationHandler;
 using Common.ValidationHandler;
 using DAL_Data_Access_Layer.Models;
+using System.Threading.Tasks;
 
 namespace Web_Forms.Pages
 {
@@ -20,8 +21,7 @@ namespace Web_Forms.Pages
             {
                 if (Request.QueryString["EmployeeID"] != null)
                 {
-                    int employeeId;
-                    if (int.TryParse(Request.QueryString["EmployeeID"], out employeeId))
+                    if (int.TryParse(Request.QueryString["EmployeeID"], out int employeeId))
                     {
                         try
                         {
@@ -29,8 +29,8 @@ namespace Web_Forms.Pages
                         }
                         catch (Exception ex)
                         {
-                            _loggerService.LogError(new NotFoundInDbException("Failed to load employee.", _loggerService));
-                            PopupControl.Show(PopupType.Error, "Error", "An error occurred while loading the employee data.");
+                            _loggerService.LogError(new DatabaseAccessException("Failed to load employee data, " + ex.Message, _loggerService));
+                            PopupControl.Show(PopupType.Error, "Error", "An unexpected error occurred.");
                         }
                     }
                     else
@@ -58,17 +58,21 @@ namespace Web_Forms.Pages
                 }
                 else
                 {
-                    throw new NotFoundInDbException("No employee data found for the given ID.", _loggerService);
+                    //throw new NotFoundInDbException("No employee data found for the given ID.", _loggerService);
                 }
             }
+            //catch (Exception ex)
+            //{
+            //    throw; // Rethrow to handle in Page_Load
+            //}
             catch (Exception ex)
             {
-                _loggerService.LogError(new NotFoundInDbException("Failed to load employee data.", _loggerService));
+                _loggerService.LogError(new DatabaseAccessException("Error while loading employee data, "+ ex.Message, _loggerService));
                 PopupControl.Show(PopupType.Error, "Error", "An error occurred while loading the employee data.");
             }
         }
 
-        protected void btnSave_Click(object sender, EventArgs e)
+        protected async void btnSave_Click(object sender, EventArgs e)
         {
             // Clear previous error messages
             lblFirstNameError.Text = string.Empty;
@@ -111,20 +115,12 @@ namespace Web_Forms.Pages
 
             if (!string.IsNullOrEmpty(errorMessage))
             {
-                // Show pop-up message with error details
                 PopupControl.Show(PopupType.Error, "Validation Error", errorMessage);
                 return;
             }
 
             try
             {
-                // Insert or Update Employee
-                SqlDataSource1.InsertParameters["FirstName"].DefaultValue = txtFirstName.Text;
-                SqlDataSource1.InsertParameters["LastName"].DefaultValue = txtLastName.Text;
-                SqlDataSource1.InsertParameters["Email"].DefaultValue = txtEmail.Text;
-                SqlDataSource1.InsertParameters["Phone"].DefaultValue = txtPhone.Text;
-                SqlDataSource1.InsertParameters["HireDate"].DefaultValue = txtHireDate.Text;
-
                 if (Request.QueryString["EmployeeID"] != null)
                 {
                     SqlDataSource1.UpdateParameters["EmployeeID"].DefaultValue = Request.QueryString["EmployeeID"];
@@ -139,15 +135,39 @@ namespace Web_Forms.Pages
                 }
                 else
                 {
+                    SqlDataSource1.InsertParameters["FirstName"].DefaultValue = txtFirstName.Text;
+                    SqlDataSource1.InsertParameters["LastName"].DefaultValue = txtLastName.Text;
+                    SqlDataSource1.InsertParameters["Email"].DefaultValue = txtEmail.Text;
+                    SqlDataSource1.InsertParameters["Phone"].DefaultValue = txtPhone.Text;
+                    SqlDataSource1.InsertParameters["HireDate"].DefaultValue = txtHireDate.Text;
+
                     SqlDataSource1.Insert();
                     PopupControl.Show(PopupType.Success, "Success", "Employee added successfully.");
                 }
+
+                // Disable the fields after the save operation
+                txtFirstName.Enabled = false;
+                txtLastName.Enabled = false;
+                txtEmail.Enabled = false;
+                txtPhone.Enabled = false;
+                txtHireDate.Enabled = false;
+                Button1.Enabled = false; // Disable the Save button
+
+                // Redirect back after a delay
+                waitAndThenRedirectBack();
             }
             catch (Exception ex)
             {
-                _loggerService.LogError(new UnauthorizedUserException("Failed to save employee data.", _loggerService));
+                //_loggerService.LogError(new UnauthorizedUserException("Failed to save employee data.", ex, _loggerService));
                 PopupControl.Show(PopupType.Error, "Error", "An error occurred while saving the employee data.");
             }
+        }
+
+
+
+        private void waitAndThenRedirectBack()
+        {
+            ScriptManager.RegisterStartupScript(this, GetType(), "Redirect", "setTimeout(function() { window.location = 'EmployeesList'; }, 3000);", true);
         }
     }
 }

@@ -21,23 +21,25 @@ namespace Common.CustomExceptions
         {
             try
             {
-                // Attempt to log to database
                 LogToDatabase(ex);
             }
             catch (Exception dbEx)
             {
-                // If logging to the database fails, log to a file
                 LogToFile(ex, dbEx);
             }
         }
 
         private void LogToDatabase(Exception ex)
         {
-            // Your database logging logic here
-            // For example, inserting the exception details into an `ErrorLogs` table
-
-            // Simulate potential failure in logging to database
-            throw new Exception("Simulated database logging failure.");
+            try
+            {
+                // Simulate potential failure in logging to database
+                throw new Exception("Simulated database logging failure.");
+            }
+            catch (Exception dbEx)
+            {
+                LogToFile(ex, dbEx);
+            }
         }
 
         private void LogToFile(Exception originalEx, Exception dbEx)
@@ -58,9 +60,7 @@ namespace Common.CustomExceptions
             }
             catch (Exception fileEx)
             {
-                // Handle any potential errors while logging to a file, such as access issues.
-                Console.WriteLine("Failed to log exception to file.");
-                Console.WriteLine(fileEx.Message);
+                throw new FileLoggingException("Failed to log exception to file.", fileEx);
             }
         }
     }
@@ -83,39 +83,38 @@ namespace Common.CustomExceptions
             Time = DateTime.Now;
             _loggerService = loggerService;
 
-            // Log the exception
             _loggerService.LogError(this);
         }
     }
 
-    public class ImageAddingException : CustomException
+    public class DatabaseLoggingException : Exception
     {
-        public ImageAddingException(string explanation, ILoggerService loggerService)
-            : base("ImageAddingException", "Could not add image.", explanation, loggerService)
+        public DatabaseLoggingException(string message, Exception innerException)
+            : base(message, innerException)
         {
         }
     }
 
-    public class NotFoundInDbException : CustomException
+    public class FileLoggingException : Exception
     {
-        public NotFoundInDbException(string explanation, ILoggerService loggerService)
-            : base("NotFoundInDbException", "Failed to get item from database.", explanation, loggerService)
+        public FileLoggingException(string message, Exception innerException)
+            : base(message, innerException)
         {
         }
     }
 
-    public class ModelStateException : CustomException
+    public class DatabaseAccessException : CustomException
     {
-        public ModelStateException(string explanation, ILoggerService loggerService)
-            : base("ModelStateException", "Model state is invalid.", explanation, loggerService)
+        public DatabaseAccessException(string message, ILoggerService loggerService)
+            : base("DatabaseAccessException", "Access to the database failed.", message, loggerService)
         {
         }
     }
 
-    public class UnauthorizedUserException : CustomException
+    public class ValidationException : CustomException
     {
-        public UnauthorizedUserException(string explanation, ILoggerService loggerService)
-            : base("UnauthorizedUserException", "User is not authorized to perform this action.", explanation, loggerService)
+        public ValidationException(string message, ILoggerService loggerService)
+            : base("ValidationException", "Validation failed.", message, loggerService)
         {
         }
     }

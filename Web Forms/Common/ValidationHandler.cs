@@ -7,12 +7,20 @@ namespace Common.ValidationHandler
     {
         public static bool ValidateFirstName(string firstName)
         {
-            return !string.IsNullOrWhiteSpace(firstName) && firstName.Length >= 1 && firstName.Length <= 30;
+            // Validate that first name is not empty, is between 1 and 30 characters long, and contains only English letters
+            return !string.IsNullOrWhiteSpace(firstName)
+                   && firstName.Length >= 1
+                   && firstName.Length <= 30
+                   && Regex.IsMatch(firstName, RegexPatterns.EnglishLettersOnly);
         }
 
         public static bool ValidateLastName(string lastName)
         {
-            return !string.IsNullOrWhiteSpace(lastName) && lastName.Length >= 1 && lastName.Length <= 30;
+            // Validate that last name is not empty, is between 1 and 30 characters long, and contains only English letters
+            return !string.IsNullOrWhiteSpace(lastName)
+                   && lastName.Length >= 1
+                   && lastName.Length <= 30
+                   && Regex.IsMatch(lastName, RegexPatterns.EnglishLettersOnly);
         }
 
         public static bool ValidateEmail(string email)
@@ -33,8 +41,16 @@ namespace Common.ValidationHandler
 
         public static bool ValidateHireDate(string hireDate)
         {
-            DateTime parsedDate;
-            return DateTime.TryParse(hireDate, out parsedDate);
+            if (DateTime.TryParse(hireDate, out DateTime parsedDate))
+            {
+                DateTime today = DateTime.Today;
+                DateTime minDate = new DateTime(1900, 1, 1);
+
+                // Check that the date is not before 1900 and not after today's date
+                return parsedDate >= minDate && parsedDate <= today;
+            }
+
+            return false;
         }
     }
 
@@ -42,5 +58,6 @@ namespace Common.ValidationHandler
     {
         public const string Email = @"^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$";
         public const string IsraeliPhone = @"^05\d{8}$";
+        public const string EnglishLettersOnly = @"^[a-zA-Z]+$"; 
     }
 }

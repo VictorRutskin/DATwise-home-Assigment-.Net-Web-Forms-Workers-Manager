@@ -28,9 +28,10 @@
     <br />
 
     <asp:Label ID="lblHireDate" runat="server" Text="Hire Date:" AssociatedControlID="txtHireDate" />
-    <asp:TextBox ID="txtHireDate" runat="server"></asp:TextBox>
+    <asp:TextBox ID="txtHireDate" runat="server" TextMode="Date"></asp:TextBox>
     <asp:Label ID="lblHireDateError" runat="server" CssClass="text-danger" ForeColor="Red"></asp:Label>
     <br />
+
 
     <asp:Button ID="Button1" runat="server" Text="Save" CssClass="btn btn-primary" OnClick="btnSave_Click" />
 
@@ -62,4 +63,5 @@
             <asp:Parameter Name="EmployeeID" Type="Int32" />
         </DeleteParameters>
     </asp:SqlDataSource>
+
 </asp:Content>
