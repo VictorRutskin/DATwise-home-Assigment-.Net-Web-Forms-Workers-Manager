@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Common.Models;
+using System;
 using System.Text.RegularExpressions;
 
-namespace Common
+namespace Common.Validator
 {
-    public class Validator
+    public class ValidationHandler
     {
         public static bool ValidateFirstName(string firstName)
         {
@@ -20,8 +21,7 @@ namespace Common
             if (string.IsNullOrWhiteSpace(email))
                 return false;
 
-            var emailPattern = @"^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$";
-            return Regex.IsMatch(email, emailPattern);
+            return Regex.IsMatch(email, RegexPatterns.Email);
         }
 
         public static bool ValidatePhone(string phone)
@@ -29,9 +29,7 @@ namespace Common
             if (string.IsNullOrWhiteSpace(phone))
                 return false;
 
-            // Israeli phone number regex: Start with 05, followed by 8 digits
-            var phonePattern = @"^05\d{8}$";
-            return Regex.IsMatch(phone, phonePattern);
+            return Regex.IsMatch(phone, RegexPatterns.IsraeliPhone);
         }
 
         public static bool ValidateHireDate(string hireDate)

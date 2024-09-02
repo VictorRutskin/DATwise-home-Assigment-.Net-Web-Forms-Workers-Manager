@@ -14,7 +14,7 @@ namespace Web_Forms.Pages
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            _serviceEmployees = new ServiceEmployees(MyConfigurationManager.GetConnectionString());
+            _serviceEmployees = new ServiceEmployees(ConfigurationHandler.GetConnectionString());
 
             if (!IsPostBack)
             {

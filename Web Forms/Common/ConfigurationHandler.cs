@@ -2,7 +2,7 @@
 
 namespace Common
 {
-    public static class MyConfigurationManager
+    public static class ConfigurationHandler
     {
         private static readonly string _connectionString = ConfigurationManager.ConnectionStrings["DATwiseDbConnection"].ConnectionString;
 
