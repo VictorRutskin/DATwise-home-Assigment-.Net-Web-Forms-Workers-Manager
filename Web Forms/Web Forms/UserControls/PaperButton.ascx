@@ -20,7 +20,7 @@
             if (checkbox.checked) {
                 setTimeout(function () {
                     window.location.href = '/EmployeesList';
-                }, 2000); // Wait for 2 seconds (2000 milliseconds)
+                }, 0); // Wait for 2 seconds (2000 milliseconds)
             }
         });
     });

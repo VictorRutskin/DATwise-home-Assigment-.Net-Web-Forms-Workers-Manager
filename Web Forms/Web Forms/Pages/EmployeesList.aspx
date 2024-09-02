@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="EmployeesList" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EmployeesList.aspx.cs" Inherits="Web_Forms.Pages.EmployeesList" Async="true" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-
             <h1>Employee List</h1>
 
             <asp:HyperLink ID="hlAddEmployee" runat="server" NavigateUrl="EmployeeForm.aspx">Add New Employee</asp:HyperLink>
@@ -60,4 +59,5 @@
 </asp:GridView>
 
 </asp:Content>
+
 

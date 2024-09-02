@@ -33,13 +33,13 @@ namespace Web_Forms.Pages
         protected global::System.Web.UI.WebControls.TextBox txtFirstName;
 
         /// <summary>
-        /// rfvFirstName control.
+        /// lblFirstNameError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFirstName;
+        protected global::System.Web.UI.WebControls.Label lblFirstNameError;
 
         /// <summary>
         /// lblLastName control.
@@ -60,13 +60,13 @@ namespace Web_Forms.Pages
         protected global::System.Web.UI.WebControls.TextBox txtLastName;
 
         /// <summary>
-        /// rfvLastName control.
+        /// lblLastNameError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLastName;
+        protected global::System.Web.UI.WebControls.Label lblLastNameError;
 
         /// <summary>
         /// lblEmail control.
@@ -87,22 +87,13 @@ namespace Web_Forms.Pages
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
         /// <summary>
-        /// rfvEmail control.
+        /// lblEmailError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvEmail;
-
-        /// <summary>
-        /// revEmail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator revEmail;
+        protected global::System.Web.UI.WebControls.Label lblEmailError;
 
         /// <summary>
         /// lblPhone control.
@@ -123,13 +114,13 @@ namespace Web_Forms.Pages
         protected global::System.Web.UI.WebControls.TextBox txtPhone;
 
         /// <summary>
-        /// rfvPhone control.
+        /// lblPhoneError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPhone;
+        protected global::System.Web.UI.WebControls.Label lblPhoneError;
 
         /// <summary>
         /// lblHireDate control.
@@ -150,21 +141,21 @@ namespace Web_Forms.Pages
         protected global::System.Web.UI.WebControls.TextBox txtHireDate;
 
         /// <summary>
-        /// rfvHireDate control.
+        /// lblHireDateError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvHireDate;
+        protected global::System.Web.UI.WebControls.Label lblHireDateError;
 
         /// <summary>
-        /// btnSave control.
+        /// Button1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSave;
+        protected global::System.Web.UI.WebControls.Button Button1;
     }
 }

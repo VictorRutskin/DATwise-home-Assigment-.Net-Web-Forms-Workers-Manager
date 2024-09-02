@@ -3,6 +3,7 @@ using Common;
 using DAL.Models;
 using System;
 using System.Configuration;
+using System.Threading.Tasks;
 using System.Web.UI;
 
 namespace Web_Forms.Pages
@@ -40,6 +41,52 @@ namespace Web_Forms.Pages
 
         protected async void btnSave_Click(object sender, EventArgs e)
         {
+            // Clear previous error messages
+            lblFirstNameError.Text = string.Empty;
+            lblLastNameError.Text = string.Empty;
+            lblEmailError.Text = string.Empty;
+            lblPhoneError.Text = string.Empty;
+            lblHireDateError.Text = string.Empty;
+
+            string errorMessage = string.Empty;
+
+            if (!Validator.ValidateFirstName(txtFirstName.Text))
+            {
+                lblFirstNameError.Text = "First Name is required.";
+                errorMessage += "First Name is required.\n";
+            }
+
+            if (!Validator.ValidateLastName(txtLastName.Text))
+            {
+                lblLastNameError.Text = "Last Name is required.";
+                errorMessage += "Last Name is required.\n";
+            }
+
+            if (!Validator.ValidateEmail(txtEmail.Text))
+            {
+                lblEmailError.Text = "Invalid email format.";
+                errorMessage += "Invalid email format.\n";
+            }
+
+            if (!Validator.ValidatePhone(txtPhone.Text))
+            {
+                lblPhoneError.Text = "Phone is required.";
+                errorMessage += "Phone is required.\n";
+            }
+
+            if (!Validator.ValidateHireDate(txtHireDate.Text))
+            {
+                lblHireDateError.Text = "Hire Date is required.";
+                errorMessage += "Hire Date is required.\n";
+            }
+
+            if (!string.IsNullOrEmpty(errorMessage))
+            {
+                // Show pop-up message with error details
+                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", $"alert('{errorMessage}');", true);
+                return;
+            }
+
             var employee = new Employee
             {
                 EmployeeID = Request.QueryString["EmployeeID"] != null ? int.Parse(Request.QueryString["EmployeeID"]) : 0,
@@ -61,5 +108,6 @@ namespace Web_Forms.Pages
 
             Response.Redirect("EmployeeList.aspx");
         }
+
     }
 }
