@@ -12,3 +12,19 @@
         </div>
     </div>
 </div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Function to show and hide the popup
+        function showPopup() {
+            $('#messagePopup').modal('show');
+            setTimeout(function () {
+                $('#messagePopup').modal('hide');
+            }, 3000); // Hide after 3 seconds
+        }
+
+        // Attach the function to the window object so it can be called from server-side code
+        window.showPopup = showPopup;
+    });
+</script>

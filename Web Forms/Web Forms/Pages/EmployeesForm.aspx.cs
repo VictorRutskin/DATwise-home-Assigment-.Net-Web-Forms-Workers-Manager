@@ -6,6 +6,7 @@ using Common.ConfigurationHandler;
 using Common.ValidationHandler;
 using DAL_Data_Access_Layer.Models;
 using System.Threading.Tasks;
+using Common;
 
 namespace Web_Forms.Pages
 {
@@ -169,7 +170,7 @@ namespace Web_Forms.Pages
 
         private void WaitAndThenRedirectBack()
         {
-            ScriptManager.RegisterStartupScript(this, GetType(), "Redirect", "setTimeout(function() { window.location = 'EmployeesList'; }, 3000);", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "Redirect", JScriptHandler.Redirect_EmployeesList(3000), true);
         }
     }
 }
