@@ -1,38 +1,46 @@
 ﻿using System;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using Common.CustomExceptions;
-using Common.ConfigurationHandler;
-using Common.ValidationHandler;
-using DAL_Data_Access_Layer.Models;
 using System.Threading.Tasks;
+using System.Web.UI;
+
+using Common.ConfigurationHandler;
+using Common.CustomExceptions;
+using Common.ValidationHandler;
 using Common;
+using DAL.Models;
+using DAL_Data_Access_Layer.Models;
+using DAL_Data_Access_Layer.Managers;
+using Microsoft.EntityFrameworkCore;
+using DAL.myDbContext;
 
 namespace Web_Forms.Pages
 {
     public partial class EmployeesForm : System.Web.UI.Page
     {
+        private myDbContext _dbContext;
+        private readonly EmployeeService _employeeService;
         private ILoggerService _loggerService;
 
-        protected void Page_Load(object sender, EventArgs e)
+        public EmployeesForm()
         {
-            _loggerService = new LoggerService(Server.MapPath(ConfigurationHandler.GetLogFilePath()));
+            // Setup DbContext options
+            var optionsBuilder = new DbContextOptionsBuilder<myDbContext>();
+            optionsBuilder.UseSqlServer(ConfigurationHandler.GetConnectionString());
+            _dbContext = new myDbContext(optionsBuilder.Options);
 
+            _employeeService = new EmployeeService(_dbContext);
+            _loggerService = new LoggerService(Server.MapPath(ConfigurationHandler.GetLogFilePath()));
+        }
+
+
+        protected async void Page_Load(object sender, EventArgs e)
+        {
             if (!IsPostBack)
             {
                 if (Request.QueryString["EmployeeID"] != null)
                 {
                     if (int.TryParse(Request.QueryString["EmployeeID"], out int employeeId))
                     {
-                        try
-                        {
-                            LoadEmployee(employeeId);
-                        }
-                        catch (Exception ex)
-                        {
-                            _loggerService.LogError(new DatabaseAccessException("Failed to load employee data, " + ex.Message, _loggerService));
-                            PopupControl.Show(PopupType.Error, "Error", "An unexpected error occurred.");
-                        }
+                        await LoadEmployee(employeeId); 
                     }
                     else
                     {
@@ -42,20 +50,18 @@ namespace Web_Forms.Pages
             }
         }
 
-        private void LoadEmployee(int employeeId)
+        private async Task LoadEmployee(int employeeId)
         {
             try
             {
-                SqlDataSource1.SelectParameters["EmployeeID"].DefaultValue = employeeId.ToString();
-                var employee = SqlDataSource1.Select(DataSourceSelectArguments.Empty) as System.Data.DataView;
-                if (employee != null && employee.Count > 0)
+                var employee = await _employeeService.GetEmployeeByIdAsync(employeeId);
+                if (employee != null)
                 {
-                    var row = employee[0];
-                    txtFirstName.Text = row["FirstName"].ToString();
-                    txtLastName.Text = row["LastName"].ToString();
-                    txtEmail.Text = row["Email"].ToString();
-                    txtPhone.Text = row["Phone"].ToString();
-                    txtHireDate.Text = Convert.ToDateTime(row["HireDate"]).ToString("yyyy-MM-dd");
+                    txtFirstName.Text = employee.FirstName;
+                    txtLastName.Text = employee.LastName;
+                    txtEmail.Text = employee.Email;
+                    txtPhone.Text = employee.Phone;
+                    txtHireDate.Text = employee.HireDate.ToString("yyyy-MM-dd");
                 }
                 else
                 {
@@ -69,7 +75,7 @@ namespace Web_Forms.Pages
             }
             catch (Exception ex)
             {
-                _loggerService.LogError(new DatabaseAccessException("Error while loading employee data, "+ ex.Message, _loggerService));
+                _loggerService.LogError(new DatabaseAccessException("Error while loading employee data, " + ex.Message, _loggerService));
                 PopupControl.Show(PopupType.Error, "Error", "An error occurred while loading the employee data.");
             }
         }
@@ -123,29 +129,19 @@ namespace Web_Forms.Pages
 
             try
             {
-                if (Request.QueryString["EmployeeID"] != null)
+                var employee = new Employee
                 {
-                    SqlDataSource1.UpdateParameters["EmployeeID"].DefaultValue = Request.QueryString["EmployeeID"];
-                    SqlDataSource1.UpdateParameters["FirstName"].DefaultValue = txtFirstName.Text;
-                    SqlDataSource1.UpdateParameters["LastName"].DefaultValue = txtLastName.Text;
-                    SqlDataSource1.UpdateParameters["Email"].DefaultValue = txtEmail.Text;
-                    SqlDataSource1.UpdateParameters["Phone"].DefaultValue = txtPhone.Text;
-                    SqlDataSource1.UpdateParameters["HireDate"].DefaultValue = txtHireDate.Text;
+                    EmployeeID = Request.QueryString["EmployeeID"] != null ? int.Parse(Request.QueryString["EmployeeID"]) : 0,
+                    FirstName = txtFirstName.Text,
+                    LastName = txtLastName.Text,
+                    Email = txtEmail.Text,
+                    Phone = txtPhone.Text,
+                    HireDate = DateTime.Parse(txtHireDate.Text)
+                };
 
-                    SqlDataSource1.Update();
-                    PopupControl.Show(PopupType.Success, "Success", "Employee updated successfully.");
-                }
-                else
-                {
-                    SqlDataSource1.InsertParameters["FirstName"].DefaultValue = txtFirstName.Text;
-                    SqlDataSource1.InsertParameters["LastName"].DefaultValue = txtLastName.Text;
-                    SqlDataSource1.InsertParameters["Email"].DefaultValue = txtEmail.Text;
-                    SqlDataSource1.InsertParameters["Phone"].DefaultValue = txtPhone.Text;
-                    SqlDataSource1.InsertParameters["HireDate"].DefaultValue = txtHireDate.Text;
+                await _employeeService.SaveEmployeeAsync(employee);
 
-                    SqlDataSource1.Insert();
-                    PopupControl.Show(PopupType.Success, "Success", "Employee added successfully.");
-                }
+                PopupControl.Show(PopupType.Success, "Success", "Employee saved successfully.");
 
                 // Disable the Save button
                 Button1.Enabled = false;
@@ -157,13 +153,12 @@ namespace Web_Forms.Pages
                 txtPhone.Enabled = false;
                 txtHireDate.Enabled = false;
 
-
                 // Redirect back after a delay
                 WaitAndThenRedirectBack();
             }
             catch (Exception ex)
             {
-                _loggerService.LogError(new DatabaseAccessException("Failed to save employee data, "+ ex.Message, _loggerService));
+                _loggerService.LogError(new DatabaseAccessException("Failed to save employee data, " + ex.Message, _loggerService));
                 PopupControl.Show(PopupType.Error, "Error", "An error occurred while saving the employee data.");
             }
         }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Web_Forms.UserControls;
@@ -7,17 +6,27 @@ using BL;
 using Common.CustomExceptions;
 using Common.ConfigurationHandler;
 using DAL_Data_Access_Layer.Models;
-using static Common.CustomExceptions.LoggerService;
+using System.Threading.Tasks;
+using DAL.Models;
+using DAL.myDbContext;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Web_Forms.Pages
 {
     public partial class EmployeesList : System.Web.UI.Page
     {
         private ILoggerService _loggerService;
+        private EmployeeService _employeeService;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             _loggerService = new LoggerService(Server.MapPath(ConfigurationHandler.GetLogFilePath()));
+            var optionsBuilder = new DbContextOptionsBuilder<myDbContext>();
+            optionsBuilder.UseSqlServer(ConfigurationHandler.GetConnectionString());
+            var dbContext = new myDbContext(optionsBuilder.Options);
+            _employeeService = new EmployeeService(dbContext);
 
             if (!IsPostBack)
             {
@@ -27,12 +36,15 @@ namespace Web_Forms.Pages
             AdvancedSearchControl.SearchClicked += OnSearchClicked;
         }
 
-        protected void OnSearchClicked(object sender, Dictionary<string, string> searchTerms)
+        protected async void OnSearchClicked(object sender, Dictionary<string, string> searchTerms)
         {
             try
             {
-                string filterExpression = BuildFilterExpression(searchTerms);
-                SqlDataSource1.FilterExpression = filterExpression;
+                // Get filtered employees from the service
+                var employees =  await _employeeService.GetFilteredEmployeesAsync(searchTerms);
+
+                // Bind to the GridView
+                gvEmployees.DataSource = employees;
                 gvEmployees.DataBind();
             }
             catch (Exception ex)
@@ -42,14 +54,14 @@ namespace Web_Forms.Pages
             }
         }
 
-        protected void gvEmployees_RowDeleting(object sender, GridViewDeleteEventArgs e)
+
+
+        protected async void gvEmployees_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             try
             {
                 int employeeId = Convert.ToInt32(gvEmployees.DataKeys[e.RowIndex].Values[0]);
-
-                SqlDataSource1.DeleteParameters["EmployeeID"].DefaultValue = employeeId.ToString();
-                SqlDataSource1.Delete();
+                await _employeeService.DeleteEmployeeAsync(employeeId);
 
                 PopupControl.Show(PopupType.Success, "Success", "Employee deleted successfully.");
                 BindEmployeeGrid();
@@ -61,10 +73,56 @@ namespace Web_Forms.Pages
             }
         }
 
-        private void BindEmployeeGrid()
+        protected void gvEmployees_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gvEmployees.EditIndex = e.NewEditIndex;
+            BindEmployeeGrid();
+        }
+
+        protected void gvEmployees_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvEmployees.EditIndex = -1;
+            BindEmployeeGrid();
+        }
+
+        protected async void gvEmployees_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             try
             {
+                int employeeId = Convert.ToInt32(gvEmployees.DataKeys[e.RowIndex].Values[0]);
+                var row = gvEmployees.Rows[e.RowIndex];
+
+                var employee = new Employee
+                {
+                    EmployeeID = employeeId,
+                    FirstName = ((TextBox)row.FindControl("txtFirstName")).Text,
+                    LastName = ((TextBox)row.FindControl("txtLastName")).Text,
+                    Email = ((TextBox)row.FindControl("txtEmail")).Text,
+                    Phone = ((TextBox)row.FindControl("txtPhone")).Text,
+                    HireDate = DateTime.Parse(((TextBox)row.FindControl("txtHireDate")).Text)
+                };
+
+                await _employeeService.SaveEmployeeAsync(employee);
+                gvEmployees.EditIndex = -1;
+                BindEmployeeGrid();
+
+                PopupControl.Show(PopupType.Success, "Success", "Employee updated successfully.");
+            }
+            catch (Exception ex)
+            {
+                _loggerService.LogError(new DatabaseAccessException("Error while updating employee data: " + ex.Message, _loggerService));
+                PopupControl.Show(PopupType.Error, "Error", "An error occurred while updating the employee data.");
+            }
+        }
+
+
+        private async void BindEmployeeGrid()
+        {
+            try
+            {
+                // Bind to the GridView
+                var employees = await _employeeService.GetAllEmployees();
+                gvEmployees.DataSource = employees;
                 gvEmployees.DataBind();
 
                 if (gvEmployees.Rows.Count == 0)
@@ -78,7 +136,6 @@ namespace Web_Forms.Pages
                 PopupControl.Show(PopupType.Error, "Error", "An error occurred while loading the employee list.");
             }
         }
-
 
         private string BuildFilterExpression(Dictionary<string, string> searchTerms)
         {
