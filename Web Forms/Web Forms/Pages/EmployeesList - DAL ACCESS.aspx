@@ -1,41 +1,14 @@
-﻿<%@ Page Title="EmployeesList" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EmployeesList.aspx.cs" Inherits="Web_Forms.Pages.EmployeesList" Async="true" %>
+﻿<%--<%@ Page Title="EmployeesList" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EmployeesList - DAL ACCESS.aspx.cs" Inherits="Web_Forms.Pages.EmployeesList" Async="true" %>
 <%@ Register TagPrefix="uc1" TagName="AdvancedSearch" Src="~/UserControls/AdvancedSearch.ascx" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Employee List</h1>
 
     <!-- Search Controls -->
-    <uc1:AdvancedSearch ID="AdvancedSearchControl" runat="server" />
+        <uc1:AdvancedSearch ID="AdvancedSearchControl" runat="server" />
 
-    <!-- SqlDataSource -->
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server"
-        ConnectionString="<%$ ConnectionStrings:DATwiseDbConnection %>"
-        SelectCommand="SELECT * FROM Employees"
-        UpdateCommand="UPDATE Employees SET FirstName=@FirstName, LastName=@LastName, Email=@Email, Phone=@Phone, HireDate=@HireDate WHERE EmployeeID=@EmployeeID"
-        DeleteCommand="DELETE FROM Employees WHERE EmployeeID=@EmployeeID"
-        InsertCommand="INSERT INTO Employees (FirstName, LastName, Email, Phone, HireDate) VALUES (@FirstName, @LastName, @Email, @Phone, @HireDate)">
-        <UpdateParameters>
-            <asp:Parameter Name="FirstName" Type="String" />
-            <asp:Parameter Name="LastName" Type="String" />
-            <asp:Parameter Name="Email" Type="String" />
-            <asp:Parameter Name="Phone" Type="String" />
-            <asp:Parameter Name="HireDate" Type="DateTime" />
-            <asp:Parameter Name="EmployeeID" Type="Int32" />
-        </UpdateParameters>
-        <DeleteParameters>
-            <asp:Parameter Name="EmployeeID" Type="Int32" />
-        </DeleteParameters>
-        <InsertParameters>
-            <asp:Parameter Name="FirstName" Type="String" />
-            <asp:Parameter Name="LastName" Type="String" />
-            <asp:Parameter Name="Email" Type="String" />
-            <asp:Parameter Name="Phone" Type="String" />
-            <asp:Parameter Name="HireDate" Type="DateTime" />
-        </InsertParameters>
-    </asp:SqlDataSource>
 
     <asp:GridView ID="gvEmployees" runat="server" AutoGenerateColumns="False" DataKeyNames="EmployeeID"
-        DataSourceID="SqlDataSource1"
         OnRowEditing="gvEmployees_RowEditing"
         OnRowDeleting="gvEmployees_RowDeleting"
         OnRowCancelingEdit="gvEmployees_RowCancelingEdit"
@@ -88,6 +61,6 @@
         </Columns>
     </asp:GridView>
 
-    <asp:HyperLink ID="hlAddEmployee" runat="server" NavigateUrl="EmployeeForm.aspx">Add New Employee</asp:HyperLink>
+        <asp:HyperLink ID="hlAddEmployee" runat="server" NavigateUrl="EmployeeForm.aspx">Add New Employee</asp:HyperLink>
 
-</asp:Content>
+</asp:Content>--%>

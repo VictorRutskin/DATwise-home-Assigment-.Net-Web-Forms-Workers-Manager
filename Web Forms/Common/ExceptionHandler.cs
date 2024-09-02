@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace CustomExceptions
+namespace Common.CustomExceptions
 {
     public interface ILoggerService
     {

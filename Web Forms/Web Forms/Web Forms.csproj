@@ -245,7 +245,9 @@
     <Content Include="Content\_Site.css" />
     <Content Include="Pages\Default.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="Pages\EmployeesForm - DAL ACCESS.aspx" />
     <Content Include="Pages\EmployeesForm.aspx" />
+    <Content Include="Pages\EmployeesList - DAL ACCESS.aspx" />
     <Content Include="Pages\EmployeesList.aspx" />
     <Content Include="UserControls\AdvancedSearch.ascx" />
     <Content Include="UserControls\Footer.ascx" />
@@ -339,12 +341,25 @@
     <Compile Include="Pages\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\EmployeesForm - DAL ACCESS.aspx.cs">
+      <DependentUpon>EmployeesForm - DAL ACCESS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\EmployeesForm - DAL ACCESS.aspx.designer.cs">
+      <DependentUpon>EmployeesForm - DAL ACCESS.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\EmployeesForm.aspx.cs">
       <DependentUpon>EmployeesForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\EmployeesForm.aspx.designer.cs">
       <DependentUpon>EmployeesForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EmployeesList - DAL ACCESS.aspx.cs">
+      <DependentUpon>EmployeesList - DAL ACCESS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EmployeesList - DAL ACCESS.aspx.designer.cs">
+      <DependentUpon>EmployeesList - DAL ACCESS.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\EmployeesList.aspx.cs">
       <DependentUpon>EmployeesList.aspx</DependentUpon>

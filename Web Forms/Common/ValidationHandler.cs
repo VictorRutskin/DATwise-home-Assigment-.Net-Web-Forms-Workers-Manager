@@ -1,8 +1,7 @@
-﻿using Common.Models;
-using System;
+﻿using System;
 using System.Text.RegularExpressions;
 
-namespace Common.Validator
+namespace Common.ValidationHandler
 {
     public class ValidationHandler
     {
@@ -37,5 +36,11 @@ namespace Common.Validator
             DateTime parsedDate;
             return DateTime.TryParse(hireDate, out parsedDate);
         }
+    }
+
+    public static class RegexPatterns
+    {
+        public const string Email = @"^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$";
+        public const string IsraeliPhone = @"^05\d{8}$";
     }
 }

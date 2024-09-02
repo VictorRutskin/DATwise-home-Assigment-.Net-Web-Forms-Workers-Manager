@@ -52,6 +52,7 @@ namespace Web_Forms
                 "~/Pages/Default.aspx"
             );
 
+
             routes.EnableFriendlyUrls(settings);
         }
     }

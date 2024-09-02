@@ -1,21 +1,14 @@
-﻿using BL;
-using Common;
-using DAL.Models;
+﻿using Common.ValidationHandler;
 using System;
-using System.Configuration;
-using System.Threading.Tasks;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace Web_Forms.Pages
 {
     public partial class EmployeesForm : System.Web.UI.Page
     {
-        private ServiceEmployees _serviceEmployees;
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            _serviceEmployees = new ServiceEmployees(ConfigurationHandler.GetConnectionString());
-
             if (!IsPostBack)
             {
                 if (Request.QueryString["EmployeeID"] != null)
@@ -26,20 +19,22 @@ namespace Web_Forms.Pages
             }
         }
 
-        private async void LoadEmployee(int employeeId)
+        private void LoadEmployee(int employeeId)
         {
-            var employee = await _serviceEmployees.GetEmployee(employeeId);
-            if (employee != null)
+            SqlDataSource1.SelectParameters["EmployeeID"].DefaultValue = employeeId.ToString();
+            var employee = SqlDataSource1.Select(DataSourceSelectArguments.Empty) as System.Data.DataView;
+            if (employee != null && employee.Count > 0)
             {
-                txtFirstName.Text = employee.FirstName;
-                txtLastName.Text = employee.LastName;
-                txtEmail.Text = employee.Email;
-                txtPhone.Text = employee.Phone;
-                txtHireDate.Text = employee.HireDate.ToString("yyyy-MM-dd");
+                var row = employee[0];
+                txtFirstName.Text = row["FirstName"].ToString();
+                txtLastName.Text = row["LastName"].ToString();
+                txtEmail.Text = row["Email"].ToString();
+                txtPhone.Text = row["Phone"].ToString();
+                txtHireDate.Text = Convert.ToDateTime(row["HireDate"]).ToString("yyyy-MM-dd");
             }
         }
 
-        protected async void btnSave_Click(object sender, EventArgs e)
+        protected void btnSave_Click(object sender, EventArgs e)
         {
             // Clear previous error messages
             lblFirstNameError.Text = string.Empty;
@@ -50,31 +45,31 @@ namespace Web_Forms.Pages
 
             string errorMessage = string.Empty;
 
-            if (!Validator.ValidateFirstName(txtFirstName.Text))
+            if (!ValidationHandler.ValidateFirstName(txtFirstName.Text))
             {
                 lblFirstNameError.Text = "First Name is required.";
                 errorMessage += "First Name is required.\n";
             }
 
-            if (!Validator.ValidateLastName(txtLastName.Text))
+            if (!ValidationHandler.ValidateLastName(txtLastName.Text))
             {
                 lblLastNameError.Text = "Last Name is required.";
                 errorMessage += "Last Name is required.\n";
             }
 
-            if (!Validator.ValidateEmail(txtEmail.Text))
+            if (!ValidationHandler.ValidateEmail(txtEmail.Text))
             {
                 lblEmailError.Text = "Invalid email format.";
                 errorMessage += "Invalid email format.\n";
             }
 
-            if (!Validator.ValidatePhone(txtPhone.Text))
+            if (!ValidationHandler.ValidatePhone(txtPhone.Text))
             {
                 lblPhoneError.Text = "Phone is required.";
                 errorMessage += "Phone is required.\n";
             }
 
-            if (!Validator.ValidateHireDate(txtHireDate.Text))
+            if (!ValidationHandler.ValidateHireDate(txtHireDate.Text))
             {
                 lblHireDateError.Text = "Hire Date is required.";
                 errorMessage += "Hire Date is required.\n";
@@ -87,27 +82,30 @@ namespace Web_Forms.Pages
                 return;
             }
 
-            var employee = new Employee
-            {
-                EmployeeID = Request.QueryString["EmployeeID"] != null ? int.Parse(Request.QueryString["EmployeeID"]) : 0,
-                FirstName = txtFirstName.Text,
-                LastName = txtLastName.Text,
-                Email = txtEmail.Text,
-                Phone = txtPhone.Text,
-                HireDate = DateTime.Parse(txtHireDate.Text)
-            };
+            // Insert or Update Employee
+            SqlDataSource1.InsertParameters["FirstName"].DefaultValue = txtFirstName.Text;
+            SqlDataSource1.InsertParameters["LastName"].DefaultValue = txtLastName.Text;
+            SqlDataSource1.InsertParameters["Email"].DefaultValue = txtEmail.Text;
+            SqlDataSource1.InsertParameters["Phone"].DefaultValue = txtPhone.Text;
+            SqlDataSource1.InsertParameters["HireDate"].DefaultValue = txtHireDate.Text;
 
-            if (employee.EmployeeID > 0)
+            if (Request.QueryString["EmployeeID"] != null)
             {
-                await _serviceEmployees.UpdateEmployee(employee);
+                SqlDataSource1.UpdateParameters["EmployeeID"].DefaultValue = Request.QueryString["EmployeeID"];
+                SqlDataSource1.UpdateParameters["FirstName"].DefaultValue = txtFirstName.Text;
+                SqlDataSource1.UpdateParameters["LastName"].DefaultValue = txtLastName.Text;
+                SqlDataSource1.UpdateParameters["Email"].DefaultValue = txtEmail.Text;
+                SqlDataSource1.UpdateParameters["Phone"].DefaultValue = txtPhone.Text;
+                SqlDataSource1.UpdateParameters["HireDate"].DefaultValue = txtHireDate.Text;
+
+                SqlDataSource1.Update();
             }
             else
             {
-                await _serviceEmployees.InsertEmployee(employee);
+                SqlDataSource1.Insert();
             }
 
             Response.Redirect("EmployeeList.aspx");
         }
-
     }
 }

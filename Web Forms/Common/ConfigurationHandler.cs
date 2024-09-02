@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 
-namespace Common
+namespace Common.ConfigurationHandler
 {
     public static class ConfigurationHandler
     {

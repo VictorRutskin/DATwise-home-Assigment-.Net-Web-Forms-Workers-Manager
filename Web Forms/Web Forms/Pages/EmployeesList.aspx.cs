@@ -1,10 +1,5 @@
-﻿using BL;
-using DAL.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Web_Forms.UserControls;
@@ -13,59 +8,56 @@ namespace Web_Forms.Pages
 {
     public partial class EmployeesList : System.Web.UI.Page
     {
-        private ServiceEmployees _employeeBL;
-
-        protected async void Page_Load(object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["DATwiseDbConnection"].ConnectionString;
-            _employeeBL = new ServiceEmployees(connectionString);
-
             if (!IsPostBack)
             {
-                await LoadEmployeesAsync();
+                // The GridView will be bound automatically by the SqlDataSource.
             }
 
             // Register the event handler for the AdvancedSearch control
             AdvancedSearchControl.SearchClicked += OnSearchClicked;
         }
 
-        private async Task LoadEmployeesAsync()
-        {
-            List<Employee> employees = await _employeeBL.GetEmployees();
-            ViewState["Employees"] = employees; // Store the data
-            BindEmployeesToGrid(employees);
-        }
-
-        private void BindEmployeesToGrid(List<Employee> employees)
-        {
-            gvEmployees.DataSource = employees;
-            gvEmployees.DataBind();
-        }
-
         protected void OnSearchClicked(object sender, Dictionary<string, string> searchTerms)
         {
-            List<Employee> employees = ViewState["Employees"] as List<Employee>;
-
-            if (employees != null)
-            {
-                var filteredEmployees = employees.Where(emp =>
-                    (string.IsNullOrEmpty(searchTerms["FirstName"]) || emp.FirstName.ToLower().Contains(searchTerms["FirstName"].ToLower())) &&
-                    (string.IsNullOrEmpty(searchTerms["LastName"]) || emp.LastName.ToLower().Contains(searchTerms["LastName"].ToLower())) &&
-                    (string.IsNullOrEmpty(searchTerms["Email"]) || emp.Email.ToLower().Contains(searchTerms["Email"].ToLower())) &&
-                    (string.IsNullOrEmpty(searchTerms["Phone"]) || emp.Phone.ToLower().Contains(searchTerms["Phone"].ToLower()))
-                ).ToList();
-
-                BindEmployeesToGrid(filteredEmployees);
-            }
+            // Apply filtering on the SqlDataSource if needed
+            string filterExpression = BuildFilterExpression(searchTerms);
+            SqlDataSource1.FilterExpression = filterExpression;
         }
 
-        protected async void gvEmployees_RowEditing(object sender, GridViewEditEventArgs e)
+        private string BuildFilterExpression(Dictionary<string, string> searchTerms)
+        {
+            var conditions = new List<string>();
+
+            if (!string.IsNullOrEmpty(searchTerms["FirstName"]))
+            {
+                conditions.Add($"FirstName LIKE '%{searchTerms["FirstName"]}%'");
+            }
+            if (!string.IsNullOrEmpty(searchTerms["LastName"]))
+            {
+                conditions.Add($"LastName LIKE '%{searchTerms["LastName"]}%'");
+            }
+            if (!string.IsNullOrEmpty(searchTerms["Email"]))
+            {
+                conditions.Add($"Email LIKE '%{searchTerms["Email"]}%'");
+            }
+            if (!string.IsNullOrEmpty(searchTerms["Phone"]))
+            {
+                conditions.Add($"Phone LIKE '%{searchTerms["Phone"]}%'");
+            }
+
+            return string.Join(" AND ", conditions);
+        }
+
+        // Event handlers for GridView
+        protected void gvEmployees_RowEditing(object sender, GridViewEditEventArgs e)
         {
             gvEmployees.EditIndex = e.NewEditIndex;
-            await LoadEmployeesAsync();
+            gvEmployees.DataBind(); // Refresh the GridView
         }
 
-        protected async void gvEmployees_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        protected void gvEmployees_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             GridViewRow row = gvEmployees.Rows[e.RowIndex];
             int employeeId = Convert.ToInt32(gvEmployees.DataKeys[e.RowIndex].Values[0]);
@@ -84,34 +76,33 @@ namespace Web_Forms.Pages
                 string phone = txtPhone.Text;
                 DateTime hireDate = DateTime.Parse(txtHireDate.Text);
 
-                Employee employee = new Employee
-                {
-                    EmployeeID = employeeId,
-                    FirstName = firstName,
-                    LastName = lastName,
-                    Email = email,
-                    Phone = phone,
-                    HireDate = hireDate
-                };
+                // Update employee logic using SqlDataSource
+                SqlDataSource1.UpdateParameters["FirstName"].DefaultValue = firstName;
+                SqlDataSource1.UpdateParameters["LastName"].DefaultValue = lastName;
+                SqlDataSource1.UpdateParameters["Email"].DefaultValue = email;
+                SqlDataSource1.UpdateParameters["Phone"].DefaultValue = phone;
+                SqlDataSource1.UpdateParameters["HireDate"].DefaultValue = hireDate.ToString();
+                SqlDataSource1.UpdateParameters["EmployeeID"].DefaultValue = employeeId.ToString();
 
-                await _employeeBL.UpdateEmployee(employee);
-
+                SqlDataSource1.Update();
                 gvEmployees.EditIndex = -1;
-                await LoadEmployeesAsync();
+                gvEmployees.DataBind(); // Refresh the GridView
             }
         }
 
-        protected async void gvEmployees_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        protected void gvEmployees_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             int employeeId = Convert.ToInt32(gvEmployees.DataKeys[e.RowIndex].Values[0]);
-            await _employeeBL.DeleteEmployee(employeeId);
-            await LoadEmployeesAsync();
+
+            // Delete employee logic using SqlDataSource
+            SqlDataSource1.DeleteParameters["EmployeeID"].DefaultValue = employeeId.ToString();
+            SqlDataSource1.Delete();
         }
 
-        protected async void gvEmployees_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        protected void gvEmployees_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gvEmployees.EditIndex = -1;
-            await LoadEmployeesAsync();
+            gvEmployees.DataBind(); // Refresh the GridView
         }
     }
 }
