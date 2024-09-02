@@ -118,4 +118,12 @@ namespace Common.CustomExceptions
         {
         }
     }
+
+    public class EmployeeIDNotFoundInDbException : CustomException
+    {
+        public EmployeeIDNotFoundInDbException(string message, ILoggerService loggerService)
+            : base("EmployeeIDNotFoundInDbException", "EmployeeID Not Found", message, loggerService)
+        {
+        }
+    }
 }

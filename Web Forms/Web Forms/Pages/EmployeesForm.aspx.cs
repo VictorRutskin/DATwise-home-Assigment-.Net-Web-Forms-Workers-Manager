@@ -58,13 +58,14 @@ namespace Web_Forms.Pages
                 }
                 else
                 {
-                    //throw new NotFoundInDbException("No employee data found for the given ID.", _loggerService);
+                    throw new EmployeeIDNotFoundInDbException("No employee data found for the given ID.", _loggerService);
                 }
             }
-            //catch (Exception ex)
-            //{
-            //    throw; // Rethrow to handle in Page_Load
-            //}
+            catch (EmployeeIDNotFoundInDbException ex)
+            {
+                PopupControl.Show(PopupType.Error, "Error", "No Employee with the id found.");
+                WaitAndThenRedirectBack();
+            }
             catch (Exception ex)
             {
                 _loggerService.LogError(new DatabaseAccessException("Error while loading employee data, "+ ex.Message, _loggerService));
@@ -145,27 +146,28 @@ namespace Web_Forms.Pages
                     PopupControl.Show(PopupType.Success, "Success", "Employee added successfully.");
                 }
 
+                // Disable the Save button
+                Button1.Enabled = false;
+
                 // Disable the fields after the save operation
                 txtFirstName.Enabled = false;
                 txtLastName.Enabled = false;
                 txtEmail.Enabled = false;
                 txtPhone.Enabled = false;
                 txtHireDate.Enabled = false;
-                Button1.Enabled = false; // Disable the Save button
+
 
                 // Redirect back after a delay
-                waitAndThenRedirectBack();
+                WaitAndThenRedirectBack();
             }
             catch (Exception ex)
             {
-                //_loggerService.LogError(new UnauthorizedUserException("Failed to save employee data.", ex, _loggerService));
+                _loggerService.LogError(new DatabaseAccessException("Failed to save employee data, "+ ex.Message, _loggerService));
                 PopupControl.Show(PopupType.Error, "Error", "An error occurred while saving the employee data.");
             }
         }
 
-
-
-        private void waitAndThenRedirectBack()
+        private void WaitAndThenRedirectBack()
         {
             ScriptManager.RegisterStartupScript(this, GetType(), "Redirect", "setTimeout(function() { window.location = 'EmployeesList'; }, 3000);", true);
         }

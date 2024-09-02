@@ -30,3 +30,11 @@ StackTrace:
 Database Logging Exception: Simulated database logging failure.
 --------------------------------------------------
 
+--------------------------------------------------
+Time: 02/09/2024 19:02:59
+Original Exception: EmployeeIDNotFoundInDbException
+Message: EmployeeIDNotFoundInDbException: EmployeeID Not Found
+StackTrace: 
+Database Logging Exception: Simulated database logging failure.
+--------------------------------------------------
+
