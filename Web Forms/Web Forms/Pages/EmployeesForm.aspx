@@ -9,38 +9,41 @@
     <div class="container">
 
         <%-- title --%>
-        <h1>Employee Form</h1>
+        <h1>Add Employee Form</h1>
 
         <%-- all inputs --%>
         <div class="form-group">
             <asp:Label ID="lblFirstName" runat="server" Text="First Name:" AssociatedControlID="txtFirstName" />
-            <asp:TextBox ID="txtFirstName" runat="server" Placeholder="* Only English letters are allowed." />
+            <asp:TextBox ID="txtFirstName" runat="server" Placeholder="* Only English letters are allowed." MaxLength="50"/>
             <asp:Label ID="lblFirstNameError" runat="server" CssClass="text-danger" ForeColor="Red"></asp:Label>
         </div>
         <div class="form-group">
             <asp:Label ID="lblLastName" runat="server" Text="Last Name:" AssociatedControlID="txtLastName" />
-            <asp:TextBox ID="txtLastName" runat="server" Placeholder="* English letters are allowed." />
+            <asp:TextBox ID="txtLastName" runat="server" Placeholder="* English letters are allowed." MaxLength="50"/>
             <asp:Label ID="lblLastNameError" runat="server" CssClass="text-danger" ForeColor="Red"></asp:Label>
         </div>
         <div class="form-group">
             <asp:Label ID="lblEmail" runat="server" Text="Email:" AssociatedControlID="txtEmail" />
-            <asp:TextBox ID="txtEmail" runat="server" Placeholder="* example@domain.com" />
+            <asp:TextBox ID="txtEmail" runat="server" Placeholder="* example@domain.com" MaxLength="50"/>
             <asp:Label ID="lblEmailError" runat="server" CssClass="text-danger" ForeColor="Red"></asp:Label>
         </div>
         <div class="form-group">
             <asp:Label ID="lblPhone" runat="server" Text="Phone:" AssociatedControlID="txtPhone" />
-            <asp:TextBox ID="txtPhone" runat="server" Placeholder="* 05XXXXXXXX (Israeli phone number)" />
+            <asp:TextBox ID="txtPhone" runat="server" Placeholder="* 05XXXXXXXX (Israeli phone number)" MaxLength="50"/>
             <asp:Label ID="lblPhoneError" runat="server" CssClass="text-danger" ForeColor="Red"></asp:Label>
         </div>
-       <div class="form-group">
+        <div class="form-group">
             <asp:Label ID="lblHireDate" runat="server" Text="Hire Date:" AssociatedControlID="txtHireDate" />
             <asp:TextBox ID="txtHireDate" runat="server" TextMode="Date" />
             <span class="input-hint">* The date must be between January 1, 1900, and today.</span>
             <asp:Label ID="lblHireDateError" runat="server" CssClass="text-danger" ForeColor="Red"></asp:Label>
         </div>
 
+
         <%-- button --%>
-        <asp:Button ID="Button1" runat="server" CssClass="btn btn-primary" OnClick="btnSave_Click" />
+        <div class="form-group">
+            <asp:Button ID="Button1" runat="server" CssClass="btn btn-primary" Text="Add Employee" OnClick="btnSave_Click" />
+        </div>
 
     </div>
 </asp:Content>

@@ -151,36 +151,41 @@ namespace Web_Forms.Pages
 
         private StringBuilder ValidateInputs()
         {
-            var errorMessages = new StringBuilder();
+            StringBuilder errorMessages = new StringBuilder();
 
-            if (!ValidationHandler.ValidateFirstName(txtFirstName.Text))
+            if (!ValidationHandler.ValidateName(txtFirstName.Text))
             {
-                lblFirstNameError.Text = "Valid First Name is required.";
-                errorMessages.AppendLine("Valid First Name is required.");
+                string error_text = "Valid First Name is required.";
+                lblFirstNameError.Text = error_text;
+                errorMessages.AppendLine(error_text);
             }
 
-            if (!ValidationHandler.ValidateLastName(txtLastName.Text))
+            if (!ValidationHandler.ValidateName(txtLastName.Text))
             {
-                lblLastNameError.Text = "Valid Last Name is required.";
-                errorMessages.AppendLine("Valid Last Name is required.");
+                string error_text = "Valid Last Name is required.";
+                lblLastNameError.Text = error_text;
+                errorMessages.AppendLine(error_text);
             }
 
             if (!ValidationHandler.ValidateEmail(txtEmail.Text))
             {
-                lblEmailError.Text = "Invalid email format.";
-                errorMessages.AppendLine("Invalid email format.");
+                string error_text = "Valid email format is required.";
+                lblEmailError.Text = error_text;
+                errorMessages.AppendLine(error_text);
             }
 
             if (!ValidationHandler.ValidatePhone(txtPhone.Text))
             {
-                lblPhoneError.Text = "Valid Phone is required.";
-                errorMessages.AppendLine("Valid Phone is required.");
+                string error_text = "Valid Phone is required.";
+                lblPhoneError.Text = error_text;
+                errorMessages.AppendLine(error_text);
             }
 
-            if (!DateTime.TryParse(txtHireDate.Text, out DateTime hireDate) || hireDate < new DateTime(1900, 1, 1) || hireDate > DateTime.Today)
+            if (!ValidationHandler.ValidateHireDate(txtHireDate.Text))
             {
-                lblHireDateError.Text = "Hire Date must be between January 1, 1900 and today.";
-                errorMessages.AppendLine("Hire Date must be between January 1, 1900 and today.");
+                string error_text = "Hire Date must be between January 1, 1900 and today.";
+                lblHireDateError.Text = error_text;
+                errorMessages.AppendLine(error_text);
             }
 
             return errorMessages;
