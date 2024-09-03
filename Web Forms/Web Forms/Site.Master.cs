@@ -11,8 +11,8 @@ namespace Web_Forms
     public partial class SiteMaster : MasterPage
     {
         public myDbContext DbContext { get; private set; }
-        public ServiceEmployee ServiceEmployee { get; private set; }
-        public ServiceLogger ServiceLogger { get; private set; }
+        public IServiceEmployee ServiceEmployee { get; private set; }
+        public IServiceLogger ServiceLogger { get; private set; }
 
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -27,6 +27,12 @@ namespace Web_Forms
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
+        }
+
+        public void InitializeServices(ref IServiceEmployee serviceEmployee,ref IServiceLogger serviceLogger)
+        {
+            serviceEmployee = this.ServiceEmployee;
+            serviceLogger = this.ServiceLogger;
         }
     }
 }

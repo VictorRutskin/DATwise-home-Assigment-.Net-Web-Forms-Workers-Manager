@@ -10,6 +10,7 @@ using DAL.DbContext;
 using BL.Interfaces;
 using DAL.Models;
 using BL.Services;
+using System.Text;
 
 namespace Web_Forms.Pages
 {
@@ -20,12 +21,12 @@ namespace Web_Forms.Pages
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            _serviceEmployee = ((SiteMaster)Master).ServiceEmployee;
-            _serviceLogger = ((SiteMaster)Master).ServiceLogger;
+            ((SiteMaster)Master).InitializeServices(ref _serviceEmployee,ref _serviceLogger);
         }
 
         protected async void Page_Load(object sender, EventArgs e)
         {
+            // If loaded for the first time
             if (!IsPostBack)
             {
                 if (Request.QueryString["EmployeeID"] != null)
@@ -63,7 +64,7 @@ namespace Web_Forms.Pages
             catch (EmployeeIDNotFoundInDbException ex)
             {
                 PopupControl.Show(PopupType.Error, "Error", "No Employee with the id found.");
-                WaitAndThenRedirectBack();
+                WaitAndThenRedirectBack(3000);
             }
             catch (Exception ex)
             {
@@ -74,79 +75,30 @@ namespace Web_Forms.Pages
 
         protected async void btnSave_Click(object sender, EventArgs e)
         {
-            // Clear previous error messages
-            lblFirstNameError.Text = string.Empty;
-            lblLastNameError.Text = string.Empty;
-            lblEmailError.Text = string.Empty;
-            lblPhoneError.Text = string.Empty;
-            lblHireDateError.Text = string.Empty;
+            ClearPreviousErrors();
 
-            string errorMessage = string.Empty;
+            StringBuilder errorMessages = ValidateInputs();
 
-            if (!ValidationHandler.ValidateFirstName(txtFirstName.Text))
+            if (errorMessages.Length > 0)
             {
-                lblFirstNameError.Text = "Valid First Name is required.";
-                errorMessage += "Valid First Name is required.\n";
-            }
-
-            if (!ValidationHandler.ValidateLastName(txtLastName.Text))
-            {
-                lblLastNameError.Text = "Valid Last Name is required.";
-                errorMessage += "Valid Last Name is required.\n";
-            }
-
-            if (!ValidationHandler.ValidateEmail(txtEmail.Text))
-            {
-                lblEmailError.Text = "Invalid email format.";
-                errorMessage += "Invalid email format.\n";
-            }
-
-            if (!ValidationHandler.ValidatePhone(txtPhone.Text))
-            {
-                lblPhoneError.Text = "Valid Phone is required.";
-                errorMessage += "Valid Phone is required.\n";
-            }
-
-            if (!DateTime.TryParse(txtHireDate.Text, out DateTime hireDate) || hireDate < new DateTime(1900, 1, 1) || hireDate > DateTime.Today)
-            {
-                lblHireDateError.Text = "Hire Date must be between January 1, 1900 and today.";
-                errorMessage += "Hire Date must be between January 1, 1900 and today.\n";
-            }
-
-            if (!string.IsNullOrEmpty(errorMessage))
-            {
-                PopupControl.Show(PopupType.Error, "Validation Error", errorMessage);
+                PopupControl.Show(PopupType.Error, "Validation Error", errorMessages.ToString());
                 return;
             }
 
             try
             {
-                var employee = new Employee
-                {
-                    EmployeeID = Request.QueryString["EmployeeID"] != null ? int.Parse(Request.QueryString["EmployeeID"]) : 0,
-                    FirstName = txtFirstName.Text,
-                    LastName = txtLastName.Text,
-                    Email = txtEmail.Text,
-                    Phone = txtPhone.Text,
-                    HireDate = hireDate
-                };
+                // Create populated employee from fields
+                Employee employee = CreateEmployee();
 
                 await _serviceEmployee.UpdateEmployeeAsync(employee);
 
                 PopupControl.Show(PopupType.Success, "Success", "Employee saved successfully.");
 
-                // Disable the Save button
-                Button1.Enabled = false;
-
-                // Disable the fields after the save operation
-                txtFirstName.Enabled = false;
-                txtLastName.Enabled = false;
-                txtEmail.Enabled = false;
-                txtPhone.Enabled = false;
-                txtHireDate.Enabled = false;
+                // Disable all controls after updating
+                DisableControls();
 
                 // Redirect back after a delay
-                WaitAndThenRedirectBack();
+                WaitAndThenRedirectBack(3000);
             }
             catch (Exception ex)
             {
@@ -155,9 +107,84 @@ namespace Web_Forms.Pages
             }
         }
 
-        private void WaitAndThenRedirectBack()
+
+        // Private methods
+        private void WaitAndThenRedirectBack(int miliseconds)
         {
-            ScriptManager.RegisterStartupScript(this, GetType(), "Redirect", JScriptHandler.Redirect_EmployeesList(3000), true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "Redirect", JScriptHandler.Redirect_EmployeesList(miliseconds), true);
         }
+
+        private void DisableControls()
+        {
+            // Disable the Save button
+            Button1.Enabled = false;
+
+            // Disable the fields 
+            txtFirstName.Enabled = false;
+            txtLastName.Enabled = false;
+            txtEmail.Enabled = false;
+            txtPhone.Enabled = false;
+            txtHireDate.Enabled = false;
+        }
+
+        private void ClearPreviousErrors()
+        {
+            lblFirstNameError.Text = string.Empty;
+            lblLastNameError.Text = string.Empty;
+            lblEmailError.Text = string.Empty;
+            lblPhoneError.Text = string.Empty;
+            lblHireDateError.Text = string.Empty;
+        }
+
+        private Employee CreateEmployee()
+        {
+            return new Employee
+            {
+                EmployeeID = Request.QueryString["EmployeeID"] != null ? int.Parse(Request.QueryString["EmployeeID"]) : 0,
+                FirstName = txtFirstName.Text,
+                LastName = txtLastName.Text,
+                Email = txtEmail.Text,
+                Phone = txtPhone.Text,
+                HireDate = DateTime.Parse(txtHireDate.Text)
+            };
+        }
+
+        private StringBuilder ValidateInputs()
+        {
+            var errorMessages = new StringBuilder();
+
+            if (!ValidationHandler.ValidateFirstName(txtFirstName.Text))
+            {
+                lblFirstNameError.Text = "Valid First Name is required.";
+                errorMessages.AppendLine("Valid First Name is required.");
+            }
+
+            if (!ValidationHandler.ValidateLastName(txtLastName.Text))
+            {
+                lblLastNameError.Text = "Valid Last Name is required.";
+                errorMessages.AppendLine("Valid Last Name is required.");
+            }
+
+            if (!ValidationHandler.ValidateEmail(txtEmail.Text))
+            {
+                lblEmailError.Text = "Invalid email format.";
+                errorMessages.AppendLine("Invalid email format.");
+            }
+
+            if (!ValidationHandler.ValidatePhone(txtPhone.Text))
+            {
+                lblPhoneError.Text = "Valid Phone is required.";
+                errorMessages.AppendLine("Valid Phone is required.");
+            }
+
+            if (!DateTime.TryParse(txtHireDate.Text, out DateTime hireDate) || hireDate < new DateTime(1900, 1, 1) || hireDate > DateTime.Today)
+            {
+                lblHireDateError.Text = "Hire Date must be between January 1, 1900 and today.";
+                errorMessages.AppendLine("Hire Date must be between January 1, 1900 and today.");
+            }
+
+            return errorMessages;
+        }
+   
     }
 }

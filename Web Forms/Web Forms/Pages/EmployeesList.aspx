@@ -4,13 +4,16 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
+    <%-- popup --%>
     <uc:Popup ID="PopupControl" runat="server" />
 
+    <%-- title --%>
     <h1>Employee List</h1>
 
     <!-- Search Controls -->
     <uc:AdvancedSearch ID="AdvancedSearchControl" runat="server" />
 
+    <%-- GridView --%>
     <asp:GridView ID="gvEmployees" runat="server" AutoGenerateColumns="False" DataKeyNames="EmployeeID"
         OnRowEditing="gvEmployees_RowEditing"
         OnRowDeleting="gvEmployees_RowDeleting"
@@ -64,6 +67,7 @@
         </Columns>
     </asp:GridView>
 
+    <%-- button --%>
     <asp:HyperLink ID="hlAddEmployee" runat="server" NavigateUrl="~/EmployeesForm">Add New Employee</asp:HyperLink>
 
 </asp:Content>

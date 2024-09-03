@@ -19,17 +19,16 @@ namespace Web_Forms.Pages
     public partial class EmployeesList : System.Web.UI.Page
     {
         private IServiceLogger _serviceLogger;
-        private ServiceEmployee _serviceEmployee;
+        private IServiceEmployee _serviceEmployee;
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            _serviceEmployee = ((SiteMaster)Master).ServiceEmployee;
-            _serviceLogger = ((SiteMaster)Master).ServiceLogger;
+            ((SiteMaster)Master).InitializeServices(ref _serviceEmployee, ref _serviceLogger);
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            // If loaded for the first time
             if (!IsPostBack)
             {
                 BindEmployeeGrid();
@@ -55,7 +54,6 @@ namespace Web_Forms.Pages
                 PopupControl.Show(PopupType.Error, "Error", "An error occurred while applying the search filter.");
             }
         }
-
 
 
         protected async void gvEmployees_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -92,17 +90,8 @@ namespace Web_Forms.Pages
             try
             {
                 int employeeId = Convert.ToInt32(gvEmployees.DataKeys[e.RowIndex].Values[0]);
-                var row = gvEmployees.Rows[e.RowIndex];
-
-                var employee = new Employee
-                {
-                    EmployeeID = employeeId,
-                    FirstName = ((TextBox)row.FindControl("txtFirstName")).Text,
-                    LastName = ((TextBox)row.FindControl("txtLastName")).Text,
-                    Email = ((TextBox)row.FindControl("txtEmail")).Text,
-                    Phone = ((TextBox)row.FindControl("txtPhone")).Text,
-                    HireDate = DateTime.Parse(((TextBox)row.FindControl("txtHireDate")).Text)
-                };
+                GridViewRow row = gvEmployees.Rows[e.RowIndex];
+                Employee employee = GetEmployeeFromRow(row);
 
                 await _serviceEmployee.UpdateEmployeeAsync(employee);
                 gvEmployees.EditIndex = -1;
@@ -118,6 +107,7 @@ namespace Web_Forms.Pages
         }
 
 
+        // Private methods
         private async void BindEmployeeGrid()
         {
             try
@@ -139,19 +129,17 @@ namespace Web_Forms.Pages
             }
         }
 
-        private string BuildFilterExpression(Dictionary<string, string> searchTerms)
+        private Employee GetEmployeeFromRow(GridViewRow row)
         {
-            var conditions = new List<string>();
-
-            foreach (var term in searchTerms)
+            return new Employee
             {
-                if (!string.IsNullOrEmpty(term.Value))
-                {
-                    conditions.Add($"{term.Key} LIKE '%{term.Value}%'");
-                }
-            }
-
-            return string.Join(" AND ", conditions);
+                FirstName = ((TextBox)row.FindControl("txtFirstName")).Text,
+                LastName = ((TextBox)row.FindControl("txtLastName")).Text,
+                Email = ((TextBox)row.FindControl("txtEmail")).Text,
+                Phone = ((TextBox)row.FindControl("txtPhone")).Text,
+                HireDate = DateTime.Parse(((TextBox)row.FindControl("txtHireDate")).Text)
+            };
         }
+
     }
 }
