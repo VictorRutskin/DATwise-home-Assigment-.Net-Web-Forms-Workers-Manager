@@ -113,8 +113,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Services\ServiceEmployees.cs" />
-    <Compile Include="Interfaces\IServiceEmployees.cs" />
+    <Compile Include="Services\ServiceEmployee.cs" />
+    <Compile Include="Interfaces\IServiceEmployee.cs" />
     <Compile Include="Interfaces\IServiceLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ServiceLogger.cs" />

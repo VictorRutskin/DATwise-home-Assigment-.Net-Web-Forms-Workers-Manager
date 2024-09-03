@@ -6,52 +6,55 @@ using System.Threading.Tasks;
 using System;
 using Common.CustomExceptions;
 
-public class ServiceLogger : IServiceLogger
+namespace BL.Services
 {
-    private readonly ILogManager _logManager;
-    private readonly string _logFilePath;
-
-    public ServiceLogger(myDbContext dbContext, string logFilePath)
+    public class ServiceLogger : IServiceLogger
     {
-        _logFilePath = logFilePath;
-        _logManager = new LogManager(dbContext);
-    }
+        private readonly ILogManager _logManager;
+        private readonly string _logFilePath;
 
-    public async Task LogErrorAsync(Exception ex)
-    {
-        try
+        public ServiceLogger(myDbContext dbContext, string logFilePath)
         {
-            await _logManager.LogExceptionAsync(ex);
+            _logFilePath = logFilePath;
+            _logManager = new LogManager(dbContext);
         }
-        catch (Exception dbEx)
-        {
-            LogToFile(ex, dbEx);
-        }
-    }
 
-    private void LogToFile(Exception originalEx, Exception dbEx)
-    {
-        try
+        public async Task LogErrorAsync(Exception ex)
         {
-            using (var writer = new StreamWriter(_logFilePath, true))
+            try
             {
-                writer.WriteLine("--------------------------------------------------");
-                writer.WriteLine($"Time: {DateTime.Now}");
-                writer.WriteLine($"Original Exception: {originalEx.GetType().Name}");
-                writer.WriteLine($"Message: {originalEx.Message}");
-                writer.WriteLine($"StackTrace: {originalEx.StackTrace}");
-                if (originalEx.InnerException != null)
-                {
-                    writer.WriteLine($"Inner Exception: {originalEx.InnerException.Message}");
-                }
-                writer.WriteLine($"Database Logging Exception: {dbEx.Message}");
-                writer.WriteLine("--------------------------------------------------");
-                writer.WriteLine();
+                await _logManager.LogExceptionAsync(ex);
+            }
+            catch (Exception dbEx)
+            {
+                LogToFile(ex, dbEx);
             }
         }
-        catch (Exception fileEx)
+
+        private void LogToFile(Exception originalEx, Exception dbEx)
         {
-            throw new FileLoggingException("Failed to log exception to file.", fileEx);
+            try
+            {
+                using (var writer = new StreamWriter(_logFilePath, true))
+                {
+                    writer.WriteLine("--------------------------------------------------");
+                    writer.WriteLine($"Time: {DateTime.Now}");
+                    writer.WriteLine($"Original Exception: {originalEx.GetType().Name}");
+                    writer.WriteLine($"Message: {originalEx.Message}");
+                    writer.WriteLine($"StackTrace: {originalEx.StackTrace}");
+                    if (originalEx.InnerException != null)
+                    {
+                        writer.WriteLine($"Inner Exception: {originalEx.InnerException.Message}");
+                    }
+                    writer.WriteLine($"Database Logging Exception: {dbEx.Message}");
+                    writer.WriteLine("--------------------------------------------------");
+                    writer.WriteLine();
+                }
+            }
+            catch (Exception fileEx)
+            {
+                throw new FileLoggingException("Failed to log exception to file.", fileEx);
+            }
         }
     }
 }

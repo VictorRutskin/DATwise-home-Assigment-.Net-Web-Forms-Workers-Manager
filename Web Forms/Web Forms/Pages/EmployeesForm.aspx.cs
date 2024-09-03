@@ -9,26 +9,21 @@ using Microsoft.EntityFrameworkCore;
 using DAL.DbContext;
 using BL.Interfaces;
 using DAL.Models;
+using BL.Services;
 
 namespace Web_Forms.Pages
 {
     public partial class EmployeesForm : System.Web.UI.Page
     {
-        private myDbContext _dbContext;
-        private readonly ServiceEmployee _serviceEmployee;
         private IServiceLogger _serviceLogger;
+        private IServiceEmployee _serviceEmployee;
 
-        public EmployeesForm()
+
+        protected void Page_Init(object sender, EventArgs e)
         {
-            // Setup DbContext options
-            var optionsBuilder = new DbContextOptionsBuilder<myDbContext>();
-            optionsBuilder.UseSqlServer(ConfigurationHandler.GetConnectionString());
-            _dbContext = new myDbContext(optionsBuilder.Options);
-
-            _serviceEmployee = new ServiceEmployee(_dbContext);
-            _serviceLogger = new ServiceLogger(_dbContext,Server.MapPath(ConfigurationHandler.GetLogFilePath()));
+            _serviceEmployee = ((SiteMaster)Master).ServiceEmployee;
+            _serviceLogger = ((SiteMaster)Master).ServiceLogger;
         }
-
 
         protected async void Page_Load(object sender, EventArgs e)
         {

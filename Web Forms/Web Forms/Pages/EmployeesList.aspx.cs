@@ -12,22 +12,23 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using BL.Interfaces;
+using BL.Services;
 
 namespace Web_Forms.Pages
 {
     public partial class EmployeesList : System.Web.UI.Page
     {
         private IServiceLogger _serviceLogger;
-        private ServiceEmployee _employeeService;
+        private ServiceEmployee _serviceEmployee;
+
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            _serviceEmployee = ((SiteMaster)Master).ServiceEmployee;
+            _serviceLogger = ((SiteMaster)Master).ServiceLogger;
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<myDbContext>();
-            optionsBuilder.UseSqlServer(ConfigurationHandler.GetConnectionString());
-            var dbContext = new myDbContext(optionsBuilder.Options);
-            _employeeService = new ServiceEmployee(dbContext);
-            _serviceLogger = new ServiceLogger(dbContext,Server.MapPath(ConfigurationHandler.GetLogFilePath()));
-
 
             if (!IsPostBack)
             {
@@ -42,7 +43,7 @@ namespace Web_Forms.Pages
             try
             {
                 // Get filtered employees from the service
-                var employees =  await _employeeService.GetFilteredEmployeesAsync(searchTerms);
+                var employees =  await _serviceEmployee.GetFilteredEmployeesAsync(searchTerms);
 
                 // Bind to the GridView
                 gvEmployees.DataSource = employees;
@@ -62,7 +63,7 @@ namespace Web_Forms.Pages
             try
             {
                 int employeeId = Convert.ToInt32(gvEmployees.DataKeys[e.RowIndex].Values[0]);
-                await _employeeService.DeleteEmployeeAsync(employeeId);
+                await _serviceEmployee.DeleteEmployeeAsync(employeeId);
 
                 PopupControl.Show(PopupType.Success, "Success", "Employee deleted successfully.");
                 BindEmployeeGrid();
@@ -103,7 +104,7 @@ namespace Web_Forms.Pages
                     HireDate = DateTime.Parse(((TextBox)row.FindControl("txtHireDate")).Text)
                 };
 
-                await _employeeService.SaveEmployeeAsync(employee);
+                await _serviceEmployee.SaveEmployeeAsync(employee);
                 gvEmployees.EditIndex = -1;
                 BindEmployeeGrid();
 
@@ -122,7 +123,7 @@ namespace Web_Forms.Pages
             try
             {
                 // Bind to the GridView
-                var employees = await _employeeService.GetAllEmployees();
+                var employees = await _serviceEmployee.GetAllEmployees();
                 gvEmployees.DataSource = employees;
                 gvEmployees.DataBind();
 
