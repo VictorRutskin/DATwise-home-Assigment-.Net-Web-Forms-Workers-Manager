@@ -18,7 +18,6 @@ namespace Web_Forms.Pages
         private IServiceLogger _serviceLogger;
         private IServiceEmployee _serviceEmployee;
 
-
         protected void Page_Init(object sender, EventArgs e)
         {
             _serviceEmployee = ((SiteMaster)Master).ServiceEmployee;
@@ -33,7 +32,7 @@ namespace Web_Forms.Pages
                 {
                     if (int.TryParse(Request.QueryString["EmployeeID"], out int employeeId))
                     {
-                        await LoadEmployee(employeeId); 
+                        await LoadEmployee(employeeId);
                     }
                     else
                     {
@@ -98,8 +97,8 @@ namespace Web_Forms.Pages
 
             if (!ValidationHandler.ValidateEmail(txtEmail.Text))
             {
-                lblEmailError.Text = "Valid Invalid email format.";
-                errorMessage += "Valid Invalid email format.\n";
+                lblEmailError.Text = "Invalid email format.";
+                errorMessage += "Invalid email format.\n";
             }
 
             if (!ValidationHandler.ValidatePhone(txtPhone.Text))
@@ -108,10 +107,10 @@ namespace Web_Forms.Pages
                 errorMessage += "Valid Phone is required.\n";
             }
 
-            if (!ValidationHandler.ValidateHireDate(txtHireDate.Text))
+            if (!DateTime.TryParse(txtHireDate.Text, out DateTime hireDate) || hireDate < new DateTime(1900, 1, 1) || hireDate > DateTime.Today)
             {
-                lblHireDateError.Text = "Valid Hire Date is required.";
-                errorMessage += "Valid Hire Date is required.\n";
+                lblHireDateError.Text = "Hire Date must be between January 1, 1900 and today.";
+                errorMessage += "Hire Date must be between January 1, 1900 and today.\n";
             }
 
             if (!string.IsNullOrEmpty(errorMessage))
@@ -129,10 +128,10 @@ namespace Web_Forms.Pages
                     LastName = txtLastName.Text,
                     Email = txtEmail.Text,
                     Phone = txtPhone.Text,
-                    HireDate = DateTime.Parse(txtHireDate.Text)
+                    HireDate = hireDate
                 };
 
-                await _serviceEmployee.SaveEmployeeAsync(employee);
+                await _serviceEmployee.UpdateEmployeeAsync(employee);
 
                 PopupControl.Show(PopupType.Success, "Success", "Employee saved successfully.");
 

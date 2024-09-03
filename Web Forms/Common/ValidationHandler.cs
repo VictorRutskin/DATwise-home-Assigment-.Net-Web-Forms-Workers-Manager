@@ -5,24 +5,25 @@ namespace Common.ValidationHandler
 {
     public class ValidationHandler
     {
+        // Between 1 and 30 characters long, and only English letters
         public static bool ValidateFirstName(string firstName)
         {
-            // Validate that first name is not empty, is between 1 and 30 characters long, and contains only English letters
             return !string.IsNullOrWhiteSpace(firstName)
                    && firstName.Length >= 1
                    && firstName.Length <= 30
                    && Regex.IsMatch(firstName, RegexPatterns.EnglishLettersOnly);
         }
 
+        // Between 1 and 30 characters long, and only English letters
         public static bool ValidateLastName(string lastName)
         {
-            // Validate that last name is not empty, is between 1 and 30 characters long, and contains only English letters
             return !string.IsNullOrWhiteSpace(lastName)
                    && lastName.Length >= 1
                    && lastName.Length <= 30
                    && Regex.IsMatch(lastName, RegexPatterns.EnglishLettersOnly);
         }
 
+        // Email regex validation
         public static bool ValidateEmail(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
@@ -31,6 +32,7 @@ namespace Common.ValidationHandler
             return Regex.IsMatch(email, RegexPatterns.Email);
         }
 
+        // IsraeliPhone regex validation
         public static bool ValidatePhone(string phone)
         {
             if (string.IsNullOrWhiteSpace(phone))
@@ -39,6 +41,7 @@ namespace Common.ValidationHandler
             return Regex.IsMatch(phone, RegexPatterns.IsraeliPhone);
         }
 
+        // Not before 1900 and not after today
         public static bool ValidateHireDate(string hireDate)
         {
             if (DateTime.TryParse(hireDate, out DateTime parsedDate))
@@ -46,7 +49,6 @@ namespace Common.ValidationHandler
                 DateTime today = DateTime.Today;
                 DateTime minDate = new DateTime(1900, 1, 1);
 
-                // Check that the date is not before 1900 and not after today's date
                 return parsedDate >= minDate && parsedDate <= today;
             }
 
@@ -54,7 +56,8 @@ namespace Common.ValidationHandler
         }
     }
 
-    public static class RegexPatterns
+    // Struct for regex validations
+    public struct RegexPatterns
     {
         public const string Email = @"^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$";
         public const string IsraeliPhone = @"^05\d{8}$";

@@ -3,7 +3,6 @@ using DAL.DbContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
 using DAL.Managers;
 using BL.Interfaces;
@@ -25,7 +24,7 @@ namespace BL.Services
             return await _employeeManager.GetEmployeeByIdAsync(employeeId);
         }
 
-        public async Task SaveEmployeeAsync(Employee employee)
+        public async Task UpdateEmployeeAsync(Employee employee)
         {
             if (employee.EmployeeID == 0)
             {
@@ -44,28 +43,26 @@ namespace BL.Services
 
         public async Task<List<Employee>> GetAllEmployees()
         {
+            // Save all employees in memory for future filtering instead of accessing db every time
             _allEmployeesList = await _employeeManager.GetAllEmployees();
             return _allEmployeesList;
         }
 
         public async Task<IEnumerable<Employee>> GetFilteredEmployeesAsync(Dictionary<string, string> searchTerms)
         {
-            // Ensure _allEmployeesList is not null
+            // Ensure _allEmployeesList is not null; if null, get employees
             if (_allEmployeesList == null)
             {
                 await GetAllEmployees();
             }
 
-            // Apply filters based on search terms
             var filteredEmployees = _allEmployeesList.AsQueryable();
 
-            // Loop through each search term and build the query
             foreach (var term in searchTerms)
             {
                 string key = term.Key.ToLower();
                 string value = term.Value.ToLower();
 
-                // Apply filters based on key-value pairs
                 switch (key)
                 {
                     case "firstname":
@@ -80,31 +77,21 @@ namespace BL.Services
                     case "phone":
                         filteredEmployees = filteredEmployees.Where(employee => employee.Phone.ToLower().Contains(value));
                         break;
-
+                    case "startdate":
+                        if (DateTime.TryParse(value, out DateTime startDate))
+                        {
+                            filteredEmployees = filteredEmployees.Where(employee => employee.HireDate.Date >= startDate.Date);
+                        }
+                        break;
+                    case "enddate":
+                        if (DateTime.TryParse(value, out DateTime endDate))
+                        {
+                            filteredEmployees = filteredEmployees.Where(employee => employee.HireDate.Date <= endDate.Date);
+                        }
+                        break;
                 }
             }
-
             return filteredEmployees.ToList();
         }
-
-
-
-
-        // This is a helper method to build the filter expression
-        private string BuildFilterExpression(Dictionary<string, string> searchTerms)
-        {
-            var conditions = new List<string>();
-
-            foreach (var term in searchTerms)
-            {
-                if (!string.IsNullOrEmpty(term.Value))
-                {
-                    conditions.Add($"{term.Key} LIKE '%{term.Value}%'");
-                }
-            }
-
-            return string.Join(" AND ", conditions);
-        }
-
     }
 }

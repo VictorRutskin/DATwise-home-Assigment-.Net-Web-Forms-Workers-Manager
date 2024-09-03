@@ -2,15 +2,15 @@
 
 namespace Common
 {
+    // Small Js scripts for injection to ScriptManager
     public static class JScriptHandler
     {
-        private readonly static string _activate_ShowPopup = @"$(document).ready(function() { window.showPopup(); });";
-
         public static string Redirect_EmployeesList(int milliseconds)
         {
             return $"setTimeout(function() {{ window.location.href = 'EmployeesList'; }}, {milliseconds});\r\n";
         }
 
+        // Unused at the moment
         public static string Redirect_UpdateForm(int id)
         {
             return $"setTimeout(function() {{ window.location.href = 'EmployeesForm?EmployeeID={id}'; }}, 200);\r\n";
@@ -18,7 +18,7 @@ namespace Common
 
         public static string Activate_ShowPopup()
         {
-            return _activate_ShowPopup;
+            return @"$(document).ready(function() { window.showPopup(); });";
         }
     }
 }

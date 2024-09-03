@@ -6,6 +6,5 @@ namespace DAL.Interfaces
     public interface ILogManager
     {
         Task LogExceptionAsync(Exception ex);
-
     }
 }

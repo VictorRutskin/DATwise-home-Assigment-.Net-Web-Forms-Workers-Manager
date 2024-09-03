@@ -30,7 +30,7 @@ namespace DAL.Managers
 
         public async Task UpdateEmployeeAsync(Employee employee)
         {
-            _context.Entry(employee).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.Entry(employee).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
 

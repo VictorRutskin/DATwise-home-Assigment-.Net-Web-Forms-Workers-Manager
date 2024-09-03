@@ -15,16 +15,16 @@ public class LogManager : ILogManager
 
     public async Task LogExceptionAsync(Exception ex)
     {
-        var logEntry = new Log
-        {
-            Time = DateTime.Now,
-            ExceptionType = ex.GetType().Name,
-            Message = ex.Message,
-            StackTrace = ex.StackTrace,
-            InnerExceptionMessage = ex.InnerException?.Message
-        };
+            var logEntry = new Log
+            {
+                Time = DateTime.Now,
+                ExceptionType = ex.GetType().Name,
+                Message = ex.Message,
+                StackTrace = ex.StackTrace,
+                InnerExceptionMessage = ex.InnerException?.Message
+            };
 
-        _context.Logs.Add(logEntry);
-        await _context.SaveChangesAsync();
+            _context.Logs.Add(logEntry);
+            await _context.SaveChangesAsync();
     }
 }

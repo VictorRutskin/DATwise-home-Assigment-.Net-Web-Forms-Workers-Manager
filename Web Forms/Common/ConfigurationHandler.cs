@@ -2,6 +2,7 @@
 
 namespace Common.ConfigurationHandler
 {
+    // Class for handling configurations from Web.config
     public static class ConfigurationHandler
     {
         private static readonly string _connectionString = ConfigurationManager.ConnectionStrings["DATwiseDbConnection"].ConnectionString;

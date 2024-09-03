@@ -7,7 +7,7 @@ namespace BL.Interfaces
     public interface IServiceEmployee
     {
         Task<Employee> GetEmployeeByIdAsync(int employeeId);
-        Task SaveEmployeeAsync(Employee employee);
+        Task UpdateEmployeeAsync(Employee employee);
         Task DeleteEmployeeAsync(int employeeId);
         Task<List<Employee>> GetAllEmployees();
         Task<IEnumerable<Employee>> GetFilteredEmployeesAsync(Dictionary<string, string> searchTerms);

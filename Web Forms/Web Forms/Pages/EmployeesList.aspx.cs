@@ -104,7 +104,7 @@ namespace Web_Forms.Pages
                     HireDate = DateTime.Parse(((TextBox)row.FindControl("txtHireDate")).Text)
                 };
 
-                await _serviceEmployee.SaveEmployeeAsync(employee);
+                await _serviceEmployee.UpdateEmployeeAsync(employee);
                 gvEmployees.EditIndex = -1;
                 BindEmployeeGrid();
 
