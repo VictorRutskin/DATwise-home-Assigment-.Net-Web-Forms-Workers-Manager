@@ -15,7 +15,7 @@
 
     <div class="background-video">
         <video autoplay muted loop>
-            <source src="/Media/home video with logo.mp4" type="video/mp4" />
+            <source src="/Media/home_background.mp4" type="video/mp4" />
             Your browser does not support the video tag.
         </video>
     </div>

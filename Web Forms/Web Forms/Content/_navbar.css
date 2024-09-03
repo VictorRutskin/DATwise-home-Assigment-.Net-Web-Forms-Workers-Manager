@@ -15,7 +15,7 @@ body {
     border-radius: 25px;
     height: fit-content;
     display: flex; /* Use flexbox for horizontal layout */
-    background-color: rgba(60, 12, 28, 0.6); /* Using --color-brown with opacity */
+    background-color: rgba(60, 12, 28, 0.6); /* Using --color-dark-orange with opacity */
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     align-items: center;
@@ -26,7 +26,7 @@ body {
 .menu-item {
     margin: 0 8px;
     padding: 12px 16px;
-    color: var(--color-white); /* Bright color for text */
+    color: var(--color-yellow); /* Bright color for text */
     font-family: sans-serif;
     font-weight: bold;
     text-decoration: none;
@@ -50,11 +50,11 @@ body {
     }
 
     .menu-item:hover::before {
-        background-color: var(--color-purple); 
+        background-color: var(--color-blue); 
         box-shadow: 0px 3px 20px 0px var(--color-black);
         transform: scale(1.2);
     }
 
     .menu-item:hover {
-        color: var(--color-white);
+        color: var(--color-yellow);
     }
