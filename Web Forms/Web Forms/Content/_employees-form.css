@@ -1,22 +1,61 @@
 ﻿@import url('_variables.css');
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: white;
-    margin: 0;
-    padding: 20px;
-    color: var(--color-blue);
-    /*overflow: hidden;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    margin: 0; 
+    background-color: #f4f4f4; 
 }
 
-h1 {
-    font-weight: 800;
+.note-container {
+    width: 500px;
+    margin-top: 15%;
+    background-color: var(--color-yellow);
+    padding: 30px;
+    box-shadow: 5px 5px 5px 5px rgba(0.2, 0.1, 0.2, 0.4);
+    border-radius: 12px;
+    background-image: linear-gradient(transparent 23px, rgba(0, 0, 0, 0.3) 24px);
+    background-size: 100% 24px;
+    line-height: 24px;
+}
+
+label {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.form-group {
     text-align: center;
-    color: var(--color-blue);
-    font-size: 2rem;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    width: auto;
 }
 
+input,
+select,
+textarea {
+    background-color: transparent;
+    color: var(--color-blue);
+    width: 100%;
+    padding: 8px 0;
+    border: 3px solid var(--color-black);
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-left-width: 0px;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+}
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+        border-color: var(--color-blue);
+        border-bottom-width: 3px;
+        outline: none;
+    }
 
 #btnSave {
     display: block;
@@ -80,29 +119,12 @@ h1 {
         background-color: var(--color-orange);
     }
 
-.action-link {
-    color: var(--color-blue);
-    text-decoration: none;
-    font-weight: 500;
-}
-
-    .action-link:hover {
-        text-decoration: underline;
-    }
-
-.btn {
+.input-hint {
     display: block;
-    padding: 12px;
-    background-color: var(--color-blue);
-    color: var(--color-yellow);
-    border: none;
-    border-radius: 5px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    margin-top: -35px;
+    margin-right: 20px;
+    color: grey;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 45px;
 }
-
-    .btn:hover {
-        background-color: var(--color-orange);
-        color: var(--color-blue);
-    }

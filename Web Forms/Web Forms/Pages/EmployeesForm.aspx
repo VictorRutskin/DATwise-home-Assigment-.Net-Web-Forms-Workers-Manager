@@ -3,10 +3,12 @@
 <%@ Register TagPrefix="uc" TagName="Popup" Src="~/UserControls/Popup.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <link href="<%= ResolveUrl("~/Content/_employees-form.css") %>" rel="stylesheet" type="text/css" />
+
     <%-- popup --%>
     <uc:Popup ID="PopupControl" runat="server" />
 
-    <div class="container">
+    <div class="note-container">
 
         <%-- title --%>
         <h1>Add Employee Form</h1>
@@ -35,7 +37,7 @@
         <div class="form-group">
             <asp:Label ID="lblHireDate" runat="server" Text="Hire Date:" AssociatedControlID="txtHireDate" />
             <asp:TextBox ID="txtHireDate" runat="server" TextMode="Date" />
-            <span class="input-hint">* The date must be between January 1, 1900, and today.</span>
+            <span class="input-hint">* Between 01/01/1900 and today.</span>
             <asp:Label ID="lblHireDateError" runat="server" CssClass="text-danger" ForeColor="Red"></asp:Label>
         </div>
 
