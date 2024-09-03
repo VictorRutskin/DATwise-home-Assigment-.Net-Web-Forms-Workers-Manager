@@ -1,14 +1,40 @@
 ﻿.search-container {
     display: flex;
-    align-items: center;
-    margin-bottom: 20px; 
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
 }
 
 .search-field {
-    margin-right: 10px;
-    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 200px;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 10px;
 }
 
 .search-button {
-    flex-shrink: 0; 
+    width: 100%;
 }
+
+.form-control {
+    text-indent: 10px;
+    background-color: transparent;
+    color: var(--color-blue);
+    padding: 8px 0;
+    border: 2px solid var(--color-blue);
+    box-sizing: border-box;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+    .form-control:focus {
+        border-color: var(--color-orange);
+        border: 3px solid var(--color-blue);
+        outline: none;
+    }

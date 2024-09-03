@@ -21,15 +21,9 @@ body {
     line-height: 24px;
 }
 
-label {
-    font-size: 20px;
-    font-weight: 700;
-}
-
 .form-group {
-    text-align: center;
-    margin-bottom: 10px;
-    width: auto;
+    text-align: left; 
+    margin-bottom: 15px; 
 }
 
 input,
@@ -122,7 +116,7 @@ textarea {
 .input-hint {
     display: block;
     margin-top: -35px;
-    margin-right: 20px;
+    margin-left: 100px;
     color: grey;
     font-size: 16px;
     font-weight: 500;
