@@ -6,55 +6,89 @@ html, body {
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-top: 50px;
 }
 
 .menu-bar {
-    border-radius: 25px;
+    margin-top: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: fit-content;
-    display: flex; /* Use flexbox for horizontal layout */
-    background-color: rgba(60, 12, 28, 0.6); /* Using --color-dark-orange with opacity */
+    display: flex;
+    align-items: center; 
+    background-color: white;
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
-    align-items: center;
     padding: 0 10px;
-    margin: 10px 0 0 0;
+    margin: 0;
+    box-sizing: border-box;
+    z-index: 1000;
+    position: relative; 
 }
+
+    .menu-bar::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 5px; 
+        background-color: var(--color-blue);
+        z-index: -1; 
+    }
+
+.logo {
+    height: 40px;
+    margin-right: 20px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    display: inline-block; 
+    margin-top: -5px;
+}
+
+    .logo:hover {
+        transform: scale(1.02); 
+    }
 
 .menu-item {
     margin: 0 8px;
     padding: 12px 16px;
-    color: var(--color-yellow); /* Bright color for text */
+    color: var(--color-blue);
     font-family: sans-serif;
     font-weight: bold;
     text-decoration: none;
     text-align: center;
-    display: inline-block; /* Make sure the <a> elements behave like inline-blocks */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
-    position: relative; /* For ::before pseudo-element */
+    display: inline-block;
+    box-sizing: border-box;
+    position: relative;
     white-space: nowrap;
+    transition: color 0.3s ease;
 }
 
     .menu-item::before {
-        content: " ";
+        content: "";
         position: absolute;
-        top: 0;
+        bottom: 0; 
         left: 0;
-        height: 100%;
+        height: 5px; 
         width: 100%;
+        background-color: transparent; 
         z-index: -1;
-        transition: 0.2s;
-        border-radius: 25px;
+        transition: background-color 0.2s ease, transform 0.2s ease;
     }
 
-    .menu-item:hover::before {
-        background-color: var(--color-blue); 
-        box-shadow: 0px 3px 20px 0px var(--color-black);
-        transform: scale(1.2);
+    .menu-item:hover::before,
+    .menu-item.active::before {
+        background-color: var(--color-blue);
     }
 
     .menu-item:hover {
-        color: var(--color-yellow);
+        color: var(--color-orange);
+    }
+
+    .menu-item.active {
+        color: var(--color-orange);
+        background-color: var(--color-blue);
     }
