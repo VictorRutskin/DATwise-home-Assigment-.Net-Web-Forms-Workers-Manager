@@ -26,6 +26,23 @@ CREATE TABLE Employees (
 GO
 ```
 
+#### Add Logs Table
+```
+USE DATwise;
+GO
+
+CREATE TABLE Logs
+(
+    Id INT PRIMARY KEY IDENTITY(1,1),  
+    Time DATETIME NOT NULL,            
+    ExceptionType NVARCHAR(255) NOT NULL, 
+    Message NVARCHAR(MAX) NOT NULL,    
+    StackTrace NVARCHAR(MAX) NULL,     
+    InnerExceptionMessage NVARCHAR(MAX) NULL 
+);
+GO
+```
+
 ## Running The Project
 - Make sure you've configured everything.
 
