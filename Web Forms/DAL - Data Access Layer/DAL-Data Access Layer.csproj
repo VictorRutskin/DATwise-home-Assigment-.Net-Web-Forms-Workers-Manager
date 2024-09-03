@@ -113,11 +113,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contexts\DbContext.cs" />
+    <Compile Include="Interfaces\IEmployeeManager.cs" />
     <Compile Include="Managers\EmployeeManager.cs" />
-    <Compile Include="Managers\EmployeeManager_old.cs" />
     <Compile Include="Interfaces\ILogManager.cs" />
     <Compile Include="Managers\LogManager.cs" />
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\Exceptions.cs" />
+    <Compile Include="Models\Log.cs" />
     <Compile Include="Models\PopupType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

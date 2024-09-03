@@ -1,24 +1,22 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Web.UI;
-
 using Common.ConfigurationHandler;
 using Common.CustomExceptions;
 using Common.ValidationHandler;
 using Common;
-using DAL.Models;
-using DAL_Data_Access_Layer.Models;
-using DAL_Data_Access_Layer.Managers;
 using Microsoft.EntityFrameworkCore;
-using DAL.myDbContext;
+using DAL.DbContext;
+using BL.Interfaces;
+using DAL.Models;
 
 namespace Web_Forms.Pages
 {
     public partial class EmployeesForm : System.Web.UI.Page
     {
         private myDbContext _dbContext;
-        private readonly EmployeeService _employeeService;
-        private ILoggerService _loggerService;
+        private readonly ServiceEmployee _serviceEmployee;
+        private IServiceLogger _serviceLogger;
 
         public EmployeesForm()
         {
@@ -27,8 +25,8 @@ namespace Web_Forms.Pages
             optionsBuilder.UseSqlServer(ConfigurationHandler.GetConnectionString());
             _dbContext = new myDbContext(optionsBuilder.Options);
 
-            _employeeService = new EmployeeService(_dbContext);
-            _loggerService = new LoggerService(Server.MapPath(ConfigurationHandler.GetLogFilePath()));
+            _serviceEmployee = new ServiceEmployee(_dbContext);
+            _serviceLogger = new ServiceLogger(_dbContext,Server.MapPath(ConfigurationHandler.GetLogFilePath()));
         }
 
 
@@ -54,7 +52,7 @@ namespace Web_Forms.Pages
         {
             try
             {
-                var employee = await _employeeService.GetEmployeeByIdAsync(employeeId);
+                var employee = await _serviceEmployee.GetEmployeeByIdAsync(employeeId);
                 if (employee != null)
                 {
                     txtFirstName.Text = employee.FirstName;
@@ -65,7 +63,7 @@ namespace Web_Forms.Pages
                 }
                 else
                 {
-                    throw new EmployeeIDNotFoundInDbException("No employee data found for the given ID.", _loggerService);
+                    throw new EmployeeIDNotFoundInDbException("No employee data found for the given ID.");
                 }
             }
             catch (EmployeeIDNotFoundInDbException ex)
@@ -75,7 +73,7 @@ namespace Web_Forms.Pages
             }
             catch (Exception ex)
             {
-                _loggerService.LogError(new DatabaseAccessException("Error while loading employee data, " + ex.Message, _loggerService));
+                await _serviceLogger.LogErrorAsync(new DatabaseAccessException("Error while loading employee data, " + ex.Message, ex));
                 PopupControl.Show(PopupType.Error, "Error", "An error occurred while loading the employee data.");
             }
         }
@@ -139,7 +137,7 @@ namespace Web_Forms.Pages
                     HireDate = DateTime.Parse(txtHireDate.Text)
                 };
 
-                await _employeeService.SaveEmployeeAsync(employee);
+                await _serviceEmployee.SaveEmployeeAsync(employee);
 
                 PopupControl.Show(PopupType.Success, "Success", "Employee saved successfully.");
 
@@ -158,7 +156,7 @@ namespace Web_Forms.Pages
             }
             catch (Exception ex)
             {
-                _loggerService.LogError(new DatabaseAccessException("Failed to save employee data, " + ex.Message, _loggerService));
+                await _serviceLogger.LogErrorAsync(new DatabaseAccessException("Failed to save employee data, " + ex.Message, ex));
                 PopupControl.Show(PopupType.Error, "Error", "An error occurred while saving the employee data.");
             }
         }

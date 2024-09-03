@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Reflection.Emit;
 using System.Runtime.Remoting.Contexts;
 
-namespace DAL.myDbContext
+namespace DAL.DbContext
 {
-    public class myDbContext : DbContext
+    public class myDbContext : Microsoft.EntityFrameworkCore.DbContext
     {
         public myDbContext(DbContextOptions<myDbContext> options)
         : base(options)
@@ -14,6 +14,7 @@ namespace DAL.myDbContext
         }
 
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Log> Logs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace DAL.Interfaces
 {
     public interface ILogManager
     {
-        void InsertLog(Exception exception);
-        void InsertLog(string message);
+        Task LogExceptionAsync(Exception ex);
+
     }
 }

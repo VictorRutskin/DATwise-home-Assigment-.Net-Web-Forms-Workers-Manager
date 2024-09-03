@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace BL.Interfaces
 {
     public interface IServiceLogger
     {
-        void InsertLog(string s);
-        void InsertLog(Exception ex);
+        Task LogErrorAsync(Exception ex);
     }
 }

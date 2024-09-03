@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL_Data_Access_Layer.Models
+namespace DAL.Models
 {
     public enum PopupType
     {

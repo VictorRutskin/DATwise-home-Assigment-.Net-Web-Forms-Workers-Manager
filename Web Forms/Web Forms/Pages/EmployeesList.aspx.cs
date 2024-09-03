@@ -5,28 +5,29 @@ using Web_Forms.UserControls;
 using BL;
 using Common.CustomExceptions;
 using Common.ConfigurationHandler;
-using DAL_Data_Access_Layer.Models;
 using System.Threading.Tasks;
 using DAL.Models;
-using DAL.myDbContext;
+using DAL.DbContext;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using BL.Interfaces;
 
 namespace Web_Forms.Pages
 {
     public partial class EmployeesList : System.Web.UI.Page
     {
-        private ILoggerService _loggerService;
-        private EmployeeService _employeeService;
+        private IServiceLogger _serviceLogger;
+        private ServiceEmployee _employeeService;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            _loggerService = new LoggerService(Server.MapPath(ConfigurationHandler.GetLogFilePath()));
             var optionsBuilder = new DbContextOptionsBuilder<myDbContext>();
             optionsBuilder.UseSqlServer(ConfigurationHandler.GetConnectionString());
             var dbContext = new myDbContext(optionsBuilder.Options);
-            _employeeService = new EmployeeService(dbContext);
+            _employeeService = new ServiceEmployee(dbContext);
+            _serviceLogger = new ServiceLogger(dbContext,Server.MapPath(ConfigurationHandler.GetLogFilePath()));
+
 
             if (!IsPostBack)
             {
@@ -49,7 +50,7 @@ namespace Web_Forms.Pages
             }
             catch (Exception ex)
             {
-                _loggerService.LogError(new DatabaseAccessException("Error while applying search filter: " + ex.Message, _loggerService));
+                await _serviceLogger.LogErrorAsync(new DatabaseAccessException("Error while applying search filter: " + ex.Message, ex));
                 PopupControl.Show(PopupType.Error, "Error", "An error occurred while applying the search filter.");
             }
         }
@@ -68,7 +69,7 @@ namespace Web_Forms.Pages
             }
             catch (Exception ex)
             {
-                _loggerService.LogError(new DatabaseAccessException("Error while deleting employee data: " + ex.Message, _loggerService));
+                await _serviceLogger.LogErrorAsync(new DatabaseAccessException("Error while deleting employee data: " + ex.Message, ex));
                 PopupControl.Show(PopupType.Error, "Error", "An error occurred while deleting the employee data.");
             }
         }
@@ -110,7 +111,7 @@ namespace Web_Forms.Pages
             }
             catch (Exception ex)
             {
-                _loggerService.LogError(new DatabaseAccessException("Error while updating employee data: " + ex.Message, _loggerService));
+                await _serviceLogger.LogErrorAsync(new DatabaseAccessException("Error while updating employee data: " + ex.Message, ex));
                 PopupControl.Show(PopupType.Error, "Error", "An error occurred while updating the employee data.");
             }
         }
@@ -132,7 +133,7 @@ namespace Web_Forms.Pages
             }
             catch (Exception ex)
             {
-                _loggerService.LogError(new DatabaseAccessException("Error while binding employee grid: " + ex.Message, _loggerService));
+                await _serviceLogger.LogErrorAsync(new DatabaseAccessException("Error while binding employee grid: " + ex.Message, ex));
                 PopupControl.Show(PopupType.Error, "Error", "An error occurred while loading the employee list.");
             }
         }

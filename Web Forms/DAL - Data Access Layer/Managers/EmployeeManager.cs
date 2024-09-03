@@ -1,13 +1,14 @@
-﻿using DAL.Models;
-using DAL.myDbContext;
+﻿using DAL.Interfaces;
+using DAL.Models;
+using DAL.DbContext;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DAL_Data_Access_Layer.Managers
+namespace DAL.Managers
 {
-    public class EmployeeManager
+    public class EmployeeManager : IEmployeeManager
     {
         private readonly myDbContext _context;
 

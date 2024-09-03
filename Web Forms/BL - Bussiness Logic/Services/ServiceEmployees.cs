@@ -1,19 +1,18 @@
 ﻿using DAL.Models;
-using DAL.myDbContext;
-using DAL_Data_Access_Layer.Managers;
-using Microsoft.EntityFrameworkCore;
+using DAL.DbContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
+using DAL.Managers;
 
-public class EmployeeService
+public class ServiceEmployee
 {
     private readonly EmployeeManager _employeeManager;
     private List<Employee> _allEmployeesList;
 
-    public EmployeeService(myDbContext dbContext)
+    public ServiceEmployee(myDbContext dbContext)
     {
         _employeeManager = new EmployeeManager(dbContext);
     }
@@ -78,9 +77,7 @@ public class EmployeeService
                 case "phone":
                     filteredEmployees = filteredEmployees.Where(employee => employee.Phone.ToLower().Contains(value));
                     break;
-                default:
-                    // Optionally handle unsupported keys
-                    throw new ArgumentException($"Unknown search term key: {key}");
+  
             }
         }
 

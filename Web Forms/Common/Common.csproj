@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationHandler.cs" />
-    <Compile Include="ExceptionHandler.cs" />
+    <Compile Include="Exceptions.cs" />
     <Compile Include="JScriptHandler.cs" />
     <Compile Include="ValidationHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

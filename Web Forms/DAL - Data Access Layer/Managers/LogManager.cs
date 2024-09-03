@@ -1,62 +1,30 @@
-﻿//using DAL.Interfaces;
-//using DAL.Contexts;
-//using DAL.Models;
+﻿using DAL.DbContext;
+using DAL.Interfaces;
+using DAL.Models;
+using System.Threading.Tasks;
+using System;
 
-//namespace DAL.Managers
-//{
-//    public class LogManager : ILogManager
-//    {
-//        private readonly Context _context;
-//        public LogManager(Context context)
-//        {
-//            _context = context;
-//        }
+public class LogManager : ILogManager
+{
+    private readonly myDbContext _context;
 
-//        public void InsertLog(Exception exception)
-//        {
-//            try
-//            {
-//                Log l = new(exception);
-//                _context.Logs.AddAsync(l);
-//                _context.SaveChangesAsync();
-//            }
-//            catch (Exception ex)
-//            {
-//                WriteToLogFile(ex.ToString());
-//            }
-//        }
+    public LogManager(myDbContext context)
+    {
+        _context = context;
+    }
 
-//        public void InsertLog(string message)
-//        {
+    public async Task LogExceptionAsync(Exception ex)
+    {
+        var logEntry = new Log
+        {
+            Time = DateTime.Now,
+            ExceptionType = ex.GetType().Name,
+            Message = ex.Message,
+            StackTrace = ex.StackTrace,
+            InnerExceptionMessage = ex.InnerException?.Message
+        };
 
-//            try
-//            {
-//                Log l = new(message);
-//                _context.Logs.AddAsync(l);
-//                _context.SaveChangesAsync();
-//            }
-//            catch (Exception ex)
-//            {
-//                WriteToLogFile(ex.ToString());
-//            }
-//        }
-
-//        private void WriteToLogFile(string msg)
-//        {
-//            string currentDateDirectory = DateTime.Now.ToString("ddMMyy");
-//            string path = currentDateDirectory;
-//            string fileName = "errorLog.txt";
-
-//            string pathWithFileName = path + "\\" + fileName;
-
-//            if (!Directory.Exists(path))
-//            {
-//                Directory.CreateDirectory(path);
-//            }
-//            using (StreamWriter sw = File.AppendText(pathWithFileName))
-//            {
-//                sw.WriteLine(msg + ";" + Environment.NewLine);
-//            }
-//        }
-//    }
-//}
+        _context.Logs.Add(logEntry);
+        await _context.SaveChangesAsync();
+    }
+}

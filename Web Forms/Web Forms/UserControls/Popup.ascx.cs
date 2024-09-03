@@ -2,7 +2,7 @@
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Common;
-using DAL_Data_Access_Layer.Models;
+using DAL.Models;
 
 namespace Web_Forms.UserControls
 {
