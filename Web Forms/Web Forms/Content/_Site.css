@@ -6,7 +6,7 @@ body {
     margin: 0;
     padding: 20px;
     color: var(--color-blue);
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 .container {
@@ -14,9 +14,13 @@ body {
     margin-top: 3%;
     background-color: var(--color-yellow);
     padding: 30px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 5px 5px 5px 5px rgba(0.2, 0.1, 0.2, 0.4);
     border-radius: 12px;
+    background-image: linear-gradient(transparent 23px, rgba(0, 0, 0, 0.3) 24px); 
+    background-size: 100% 24px;
+    line-height: 24px;
 }
+
 
 h1 {
     font-weight: 800;
@@ -39,23 +43,26 @@ label {
 input,
 select,
 textarea {
-    background-color: var(--color-yellow);
+    background-color: transparent;
     color: var(--color-blue);
     width: 100%;
-    padding: 12px;
-    border-radius: 5px;
-    border: 1px solid var(--color-dark-orange);
+    padding: 8px 0; 
+    border: 3px solid var(--color-black);
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-left-width: 0px;
     box-sizing: border-box;
     font-size: 16px;
     font-weight: 500;
+    line-height: 24px; 
 }
 
     input:focus,
     select:focus,
     textarea:focus {
         border-color: var(--color-blue);
-        outline: none;
-        box-shadow: 0 0 5px rgba(212, 44, 76, 0.5);
+        border-bottom-width: 3px; 
+        outline: none; 
     }
 
 #btnSave {
@@ -143,7 +150,7 @@ textarea {
 }
 
     .btn:hover {
-        background-color: var(--color-dark-orange);
+        background-color: var(--color-orange);
         color: var(--color-blue);
     }
 
@@ -156,3 +163,4 @@ textarea {
     font-weight: 500;
     margin-bottom: 45px;
 }
+
