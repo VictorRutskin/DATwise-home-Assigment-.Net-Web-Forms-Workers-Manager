@@ -86,32 +86,32 @@ namespace Web_Forms.Pages
 
             if (!ValidationHandler.ValidateFirstName(txtFirstName.Text))
             {
-                lblFirstNameError.Text = "First Name is required.";
-                errorMessage += "First Name is required.\n";
+                lblFirstNameError.Text = "Valid First Name is required.";
+                errorMessage += "Valid First Name is required.\n";
             }
 
             if (!ValidationHandler.ValidateLastName(txtLastName.Text))
             {
-                lblLastNameError.Text = "Last Name is required.";
-                errorMessage += "Last Name is required.\n";
+                lblLastNameError.Text = "Valid Last Name is required.";
+                errorMessage += "Valid Last Name is required.\n";
             }
 
             if (!ValidationHandler.ValidateEmail(txtEmail.Text))
             {
-                lblEmailError.Text = "Invalid email format.";
-                errorMessage += "Invalid email format.\n";
+                lblEmailError.Text = "Valid Invalid email format.";
+                errorMessage += "Valid Invalid email format.\n";
             }
 
             if (!ValidationHandler.ValidatePhone(txtPhone.Text))
             {
-                lblPhoneError.Text = "Phone is required.";
-                errorMessage += "Phone is required.\n";
+                lblPhoneError.Text = "Valid Phone is required.";
+                errorMessage += "Valid Phone is required.\n";
             }
 
             if (!ValidationHandler.ValidateHireDate(txtHireDate.Text))
             {
-                lblHireDateError.Text = "Hire Date is required.";
-                errorMessage += "Hire Date is required.\n";
+                lblHireDateError.Text = "Valid Hire Date is required.";
+                errorMessage += "Valid Hire Date is required.\n";
             }
 
             if (!string.IsNullOrEmpty(errorMessage))

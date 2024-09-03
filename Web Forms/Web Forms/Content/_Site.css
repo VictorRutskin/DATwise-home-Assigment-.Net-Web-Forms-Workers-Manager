@@ -10,7 +10,7 @@ body {
 }
 
 .container {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: auto;
     background-color: var(--color-yellow);
     padding: 30px;
@@ -25,14 +25,16 @@ h1 {
     margin-bottom: 20px;
 }
 
+.form-group {
+    margin-bottom: 20px;
+    width:1000px;
+}
+
 input,
 select,
 textarea {
     width: 100%;
-    max-width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 20px;
+    padding: 12px; 
     border-radius: 5px;
     border: 1px solid var(--color-dark-orange);
     box-sizing: border-box;
@@ -118,3 +120,10 @@ textarea {
     .action-link:hover {
         text-decoration: underline;
     }
+
+.input-hint {
+    display: block;
+    margin-top: 5px;
+    color: var(--color-black);
+    font-size: 0.9rem;
+}
