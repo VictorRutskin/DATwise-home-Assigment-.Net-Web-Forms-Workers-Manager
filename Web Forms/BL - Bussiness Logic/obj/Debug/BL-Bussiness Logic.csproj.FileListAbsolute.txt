@@ -1,0 +1,58 @@
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\BL - Bussiness Logic.dll.config
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\BL - Bussiness Logic.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\BL - Bussiness Logic.pdb
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Common.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\DAL - Data Access Layer.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Bcl.HashCode.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.EntityFrameworkCore.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Extensions.Caching.Abstractions.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Extensions.Caching.Memory.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Extensions.Configuration.Binder.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Extensions.Configuration.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Extensions.DependencyInjection.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Extensions.Logging.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Extensions.Options.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Extensions.Primitives.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\System.Buffers.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\System.Collections.Immutable.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\System.ComponentModel.Annotations.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\System.Memory.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\System.Numerics.Vectors.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Common.pdb
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\DAL - Data Access Layer.pdb
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\DAL - Data Access Layer.dll.config
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Bcl.HashCode.xml
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.EntityFrameworkCore.xml
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.EntityFrameworkCore.Abstractions.xml
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Extensions.Caching.Abstractions.xml
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Extensions.Caching.Memory.xml
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Extensions.Configuration.xml
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Extensions.Configuration.Abstractions.xml
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Extensions.Configuration.Binder.xml
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Extensions.DependencyInjection.xml
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Extensions.Logging.xml
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Extensions.Options.xml
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\Microsoft.Extensions.Primitives.xml
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\System.Buffers.xml
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\System.Collections.Immutable.xml
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\System.Memory.xml
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\System.Numerics.Vectors.xml
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\obj\Debug\BL-Bussiness Logic.csproj.AssemblyReference.cache
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\obj\Debug\BL-Bussiness Logic.csproj.CoreCompileInputs.cache
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\obj\Debug\BL-Bussiness Logic.csproj.CopyComplete
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\obj\Debug\BL - Bussiness Logic.dll
+D:\Projects\Git\My Git\Web\DATwise-home-Assigment-.Net-Web-Forms-Workers-Manager\Web Forms\BL - Bussiness Logic\obj\Debug\BL - Bussiness Logic.pdb
