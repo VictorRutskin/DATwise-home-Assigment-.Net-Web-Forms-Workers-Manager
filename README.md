@@ -1,9 +1,22 @@
 # DATwise home Assigment - .Net Web Forms Workers Manager
- 
+A .NET Web Forms application designed for managing workers. This project serves as a comprehensive platform for performing CRUD operations on employee records, with features including advanced search, data filtering, and accessability support.
+
 ## Configuration
 
-### MSSQL
-- Execute the next query scripts 
+### Web Config - Edit the needed connection string 
+```
+<connectionStrings>
+  <add name="DATwiseDbConnection" 
+       connectionString="server=your_server;
+                         database=DATwise;
+                         User ID=your_username;
+                         Password=your_password;
+                         TrustServerCertificate=True" 
+       providerName="System.Data.SqlClient" />
+</connectionStrings>
+```
+
+### MSSQL - Execute the next query scripts 
 
 #### Database Creation
 ```
