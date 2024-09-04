@@ -3,7 +3,7 @@
 <link href="<%= ResolveUrl("~/Content/_paper-button.css") %>" rel="stylesheet" type="text/css" />
 
 <input type="checkbox" name="send" id="send" />
-<label for="send" class="send">
+<label for="send" class="send btn">
     <div class="rotate">
         <div class="move">
             <div class="part left"></div>

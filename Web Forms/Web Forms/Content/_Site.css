@@ -38,12 +38,14 @@ h1 {
     margin-right: 10px;
     color: var(--color-yellow);
 }
-
-    .btn:hover {
-        transform: scale(1.1);
-        color: var(--color-yellow);
-        background-color: var(--color-dark-blue);
-    }
+.large-btn {
+    font-size: 36px;
+}
+.btn:hover {
+    transform: scale(1.1);
+    color: var(--color-yellow);
+    background-color: var(--color-dark-blue);
+}
 
 .btn-delete {
     background-color: var(--color-red);
@@ -52,3 +54,8 @@ h1 {
     .btn-delete:hover {
         background-color: var(--color-dark-red);
     }
+
+
+.hide-checkbox {
+    display: none; 
+}

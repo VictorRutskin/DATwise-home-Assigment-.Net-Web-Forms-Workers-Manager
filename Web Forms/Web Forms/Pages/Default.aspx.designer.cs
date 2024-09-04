@@ -15,12 +15,12 @@ namespace Web_Forms.Pages
     {
 
         /// <summary>
-        /// PaperButton control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Web_Forms.UserControls.PaperButton PaperButton;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
     }
 }
