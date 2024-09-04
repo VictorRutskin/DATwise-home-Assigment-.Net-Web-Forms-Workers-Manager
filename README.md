@@ -18,7 +18,7 @@ A .NET Web Forms application designed for managing workers. This project serves 
 - **Add/Edit Employee:** Create a page (`EmployeeForm.aspx`) with a form to add a new employee or edit an existing one. The form should include validation for required fields and correct data formats (e.g., email).
 
 ### 3. Functionality:
-- Implement data access using `SqlDataSource`.
+- Implement data access using `SqlDataSource` (i have a branch for that, but i've implemented Entity Framework because its much better!)
 - The application should include basic input validation (e.g., required fields, valid email format).
 - Use appropriate ASP.NET controls like `GridView`, `DetailsView`, `TextBox`, `Button`, etc.
 - Implement error handling to manage potential exceptions during database operations.
