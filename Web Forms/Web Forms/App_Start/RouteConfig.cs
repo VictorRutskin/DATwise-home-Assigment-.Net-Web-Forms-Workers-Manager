@@ -20,18 +20,6 @@ namespace Web_Forms
                 "", // routeUrl
                 $"{baseUrl}/Default.aspx" // file location
             );
-            // About 
-            routes.MapPageRoute(
-                "AboutRoute",
-                "About",
-                $"{baseUrl}/About.aspx"
-            );
-            // Contact 
-            routes.MapPageRoute(
-                "ContactRoute",
-                "Contact",
-                 $"{baseUrl}/Contact.aspx"
-            );
             // EmployeeForm 
             routes.MapPageRoute(
                 "EmployeesFormRoute",

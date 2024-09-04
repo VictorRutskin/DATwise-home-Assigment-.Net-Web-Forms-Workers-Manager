@@ -32,17 +32,15 @@
         </div>
     </form>
 </body>
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function () {
-            var checkbox = document.getElementById('send');
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        var checkbox = document.getElementById('send');
 
-            checkbox.addEventListener('change', function () {
-                if (checkbox.checked) {
-                    setTimeout(function () {
-                        window.location.href = '/EmployeesList';
-                    }, 0); // Wait for 2 seconds (2000 milliseconds)
-                }
-            });
+        checkbox.addEventListener('change', function () {
+            if (checkbox.checked) {
+                window.location.href = '/EmployeesList';
+            }
         });
-    </script>
+    });
+</script>
 </html>
