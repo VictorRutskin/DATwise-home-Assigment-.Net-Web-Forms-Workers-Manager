@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="Home Page" Language="C#" AutoEventWireup="true" CodeBehind="~/Pages/Default.aspx.cs" Inherits="Web_Forms.Pages._Default" %>
-<%@ Register Src="~/UserControls/PaperButton.ascx" TagPrefix="uc" TagName="PaperButton" %>
 
 <!DOCTYPE html>
 <html>

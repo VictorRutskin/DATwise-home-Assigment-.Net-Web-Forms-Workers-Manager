@@ -33,6 +33,8 @@ namespace Web_Forms.Pages
                 {
                     if (int.TryParse(Request.QueryString["EmployeeID"], out int employeeId))
                     {
+                        formTitle.InnerText = "Edit Employee Form";
+                        Button1.Text = "Edit Employee";
                         await LoadEmployee(employeeId);
                     }
                     else
@@ -42,6 +44,8 @@ namespace Web_Forms.Pages
                 }
             }
         }
+
+
 
         private async Task LoadEmployee(int employeeId)
         {

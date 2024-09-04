@@ -11,7 +11,7 @@
     <div class="note-container">
 
         <%-- title --%>
-        <h1>Add Employee Form</h1>
+        <h1 id="formTitle" runat="server">Add Employee Form</h1>
 
         <%-- all inputs --%>
         <div class="form-group">
