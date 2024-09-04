@@ -3,7 +3,7 @@
 <link href="<%= ResolveUrl("~/Content/_footer.css") %>" rel="stylesheet" type="text/css" />
 
 <footer>
-    <p>&copy; 2024 WorkWISE. All rights reserved.</p>
+    <p>&copy; 2024 WORKwise. All rights reserved.</p>
     <p>
         <a href="#">Privacy Policy</a> | 
         <a href="#">Terms of Service</a>

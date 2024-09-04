@@ -29,8 +29,8 @@
             <asp:TextBox ID="txtEndDate" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
         </div>
         <div class="buttons-container">
-            <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary search-button" OnClick="btnSearch_Click" />
-            <asp:Button ID="btnClear" runat="server" Text="Clear All" CssClass="btn btn-secondary search-button" OnClick="btnClear_Click" />
+            <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn" OnClick="btnSearch_Click" />
+            <asp:Button ID="btnClear" runat="server" Text="Clear All" CssClass="btn" OnClick="btnClear_Click" />
         </div>
     </div>
     <asp:Label ID="lblSearchError" runat="server" CssClass="text-danger" ForeColor="Red"></asp:Label>

@@ -73,6 +73,7 @@ namespace Web_Forms.Pages
             }
         }
 
+
         protected void gvEmployees_RowEditing(object sender, GridViewEditEventArgs e)
         {
             gvEmployees.EditIndex = e.NewEditIndex;
@@ -106,13 +107,19 @@ namespace Web_Forms.Pages
             }
         }
 
+        protected void gvEmployees_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvEmployees.PageIndex = e.NewPageIndex;
+            BindEmployeeGrid(); 
+        }
+
+
 
         // Private methods
         private async void BindEmployeeGrid()
         {
             try
             {
-                // Bind to the GridView
                 var employees = await _serviceEmployee.GetAllEmployees();
                 gvEmployees.DataSource = employees;
                 gvEmployees.DataBind();
@@ -128,6 +135,7 @@ namespace Web_Forms.Pages
                 PopupControl.Show(PopupType.Error, "Error", "An error occurred while loading the employee list.");
             }
         }
+
 
         private Employee GetEmployeeFromRow(GridViewRow row)
         {

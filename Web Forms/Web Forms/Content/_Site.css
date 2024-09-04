@@ -17,25 +17,38 @@ h1 {
     margin-bottom: 20px;
 }
 
-.btn {
-    display: block;
-    padding: 12px;
-    background-color: var(--color-blue);
-    color: var(--color-yellow);
-    border: none;
-    border-radius: 5px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-    .btn:hover {
-        background-color: var(--color-orange);
-        color: var(--color-blue);
-    }
-
 .form-label {
     margin-bottom: 5px;
     font-size: 20px;
     font-weight: bold;
 }
+
+/* buttons */
+.btn {
+    background-color: var(--color-blue);
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    color: var(--color-yellow);
+}
+
+    .btn:hover {
+        transform: scale(1.1);
+        color: var(--color-yellow);
+        background-color: var(--color-dark-blue);
+    }
+
+.btn-delete {
+    background-color: var(--color-red);
+}
+
+    .btn-delete:hover {
+        background-color: var(--color-dark-red);
+    }
