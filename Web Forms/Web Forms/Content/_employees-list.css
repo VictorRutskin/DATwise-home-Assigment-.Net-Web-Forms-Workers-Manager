@@ -20,10 +20,11 @@
     min-width: 950px;
 }
 
-.add-button-space{
-    margin:30px;
+.add-button-space {
+    margin: 30px;
 }
 
+/* Employee Table */
 .employee-table {
     width: 100%;
     border-collapse: collapse;
@@ -32,40 +33,42 @@
     border: none;
 }
 
-    .employee-table th,
-    .employee-table td {
-        border: none;
-        padding: 12px;
-        text-align: left;
-        font-size: 1rem;
-    }
+.employee-table th,
+.employee-table td {
+    border: none;
+    padding: 12px;
+    text-align: left;
+    font-size: 1rem;
+}
 
-    .employee-table th {
-        background-color: var(--color-blue);
-        color: var(--color-yellow);
-        font-weight: 600;
-        text-transform: uppercase;
-    }
+.employee-table th {
+    background-color: var(--color-blue);
+    color: var(--color-yellow);
+    font-weight: 600;
+    text-transform: uppercase;
+}
 
-    .employee-table tr {
-        background-color: transparent;
+.employee-table tr {
+    background-color: transparent;
+}
 
-    }
-
+/* Possible for onhover background  in table trs*/
 /*        .employee-table tr:hover {
             background-color: var(--color-orange);
         }*/
 
+/* Action Link */
 .action-link {
     color: var(--color-blue);
     text-decoration: none;
     font-weight: 500;
 }
 
-    .action-link:hover {
-        text-decoration: underline;
-    }
+.action-link:hover {
+    text-decoration: underline;
+}
 
+/* Form */
 .form-label {
     margin-bottom: 5px;
     font-size: 16px;
@@ -76,48 +79,48 @@
     margin-bottom: 15px;
 }
 
-    .form-group label {
-        display: block;
-        margin-bottom: 5px;
-        color: var(--color-blue);
-    }
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--color-blue);
+}
 
-    .form-group input {
-        width: calc(100% - 24px);
-        padding: 8px 10px;
-        font-size: 1rem;
-        border: 1px solid var(--color-dark-orange);
-        border-radius: 5px;
-        box-sizing: border-box;
-        outline: none;
-        transition: border-color 0.3s ease;
-    }
+.form-group input {
+    width: calc(100% - 24px);
+    padding: 8px 10px;
+    font-size: 1rem;
+    border: 1px solid var(--color-dark-orange);
+    border-radius: 5px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
 
-        .form-group input:focus {
-            border-color: var(--color-blue);
-        }
+.form-group input:focus {
+    border-color: var(--color-blue);
+ }
 
 /* gridview */
 .gridview-pager {
     text-align: center;
 }
 
-    .gridview-pager a,
-    .gridview-pager span {
-        display: inline-block;
-        font-size: 1rem;
-        text-decoration: none;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
+.gridview-pager a,
+.gridview-pager span {
+    display: inline-block;
+    font-size: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
-    .gridview-pager .selected-page {
-        background-color: var(--color-blue);
-        color: var(--color-yellow);
-        border-color: var(--color-blue);
-    }
+.gridview-pager .selected-page {
+    background-color: var(--color-blue);
+    color: var(--color-yellow);
+    border-color: var(--color-blue);
+}
 
-    .gridview-pager a:hover {
-        color: var(--color-blue);
-    }
+.gridview-pager a:hover {
+    color: var(--color-blue);
+}
 

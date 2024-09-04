@@ -23,7 +23,7 @@ h1 {
     font-weight: bold;
 }
 
-/* buttons */
+/* Buttons */
 .btn {
     background-color: var(--color-blue);
     display: inline-block;
@@ -51,10 +51,9 @@ h1 {
     background-color: var(--color-red);
 }
 
-    .btn-delete:hover {
-        background-color: var(--color-dark-red);
-    }
-
+.btn-delete:hover {
+    background-color: var(--color-dark-red);
+}
 
 .hide-checkbox {
     display: none; 

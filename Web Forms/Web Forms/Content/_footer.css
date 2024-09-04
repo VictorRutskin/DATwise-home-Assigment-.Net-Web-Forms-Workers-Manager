@@ -12,6 +12,7 @@ body {
     flex: 1;
 }
 
+/* Footer */
 footer {
     display: flex;
     flex-direction: column;
@@ -24,18 +25,18 @@ footer {
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
 }
 
-    footer p {
-        margin: 0;
-        font-size: 0.9em;
-    }
+footer p {
+    margin: 0;
+    font-size: 0.9em;
+}
 
-    footer a {
-        color: var(--color-dark-orange);
-        text-decoration: none;
-        font-weight: bold;
-    }
+footer a {
+    color: var(--color-dark-orange);
+    text-decoration: none;
+    font-weight: bold;
+}
 
-        footer a:hover {
-            color: var(--color-orange);
-        }
+footer a:hover {
+    color: var(--color-orange);
+}
 

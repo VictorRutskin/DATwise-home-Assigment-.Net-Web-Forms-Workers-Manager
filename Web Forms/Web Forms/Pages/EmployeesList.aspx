@@ -13,11 +13,11 @@
         <%-- title --%>
         <h1>Employee List</h1>
 
-        <!-- Search Controls -->
+        <!-- search controls -->
         <uc:AdvancedSearch ID="AdvancedSearchControl" runat="server" />
 
         <div class="semi-container">
-            <%-- GridView --%>
+            <%-- gridView --%>
             <asp:GridView ID="gvEmployees" runat="server" AutoGenerateColumns="False" DataKeyNames="EmployeeID"
                 OnRowDeleting="gvEmployees_RowDeleting"
                 OnPageIndexChanging="gvEmployees_PageIndexChanging" 

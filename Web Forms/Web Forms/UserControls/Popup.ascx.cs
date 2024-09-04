@@ -25,10 +25,9 @@ namespace Web_Forms.UserControls
 
         }
 
-
+        // Return CSS design class based on popup type 
         private string GetPopupClass(PopupType type)
         {
-            // Return CSS design class based on popup type 
             switch (type)
             {
                 case PopupType.Error:

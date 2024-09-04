@@ -26,6 +26,7 @@ body {
     margin-bottom: 15px; 
 }
 
+/* Input, Select, Textarea */
 input,
 select,
 textarea {
@@ -43,75 +44,14 @@ textarea {
     line-height: 24px;
 }
 
-    input:focus,
-    select:focus,
-    textarea:focus {
+input:focus,
+select:focus,
+textarea:focus {
         border-color: var(--color-blue);
         border-bottom-width: 3px;
         outline: none;
-    }
-
-#btnSave {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    background-color: var(--color-blue);
-    color: var(--color-yellow);
-    border: none;
-    border-radius: 5px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-    #btnSave:hover {
-        background-color: var(--color-dark-orange);
-    }
-
-#hlAddEmployee {
-    display: inline-block;
-    margin-bottom: 20px;
-    padding: 10px 20px;
-    background-color: var(--color-blue);
-    color: var(--color-yellow);
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-    #hlAddEmployee:hover {
-        background-color: var(--color-dark-orange);
-    }
-
-#gvEmployees {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-    #gvEmployees th,
-    #gvEmployees td {
-        border: 1px solid var(--color-dark-orange);
-        padding: 12px;
-        text-align: left;
-        font-size: 0.9rem;
-    }
-
-    #gvEmployees th {
-        background-color: var(--color-blue);
-        color: var(--color-yellow);
-        font-weight: 600;
-    }
-
-    #gvEmployees tr:nth-child(even) {
-        background-color: var(--color-yellow);
-    }
-
-    #gvEmployees tr:hover {
-        background-color: var(--color-orange);
-    }
 
 .input-hint {
     display: block;
