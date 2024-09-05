@@ -100,16 +100,16 @@ GO
 ```
 INSERT INTO [DATwise].[dbo].[Employees] ( [FirstName], [LastName], [Email], [Phone], [HireDate])
 VALUES
-('John', 'Doe', 'johndoe@example.com', '0521234567', '2021-05-15'),
-('Jane', 'Smith', 'janesmith@example.com', '0539876543', '2020-08-20'),
-('Michael', 'Johnson', 'michaeljohnson@example.com', '0541239876', '2019-11-01'),
-('Emily', 'Brown', 'emilybrown@example.com', '0522345678', '2022-01-30'),
-('David', 'Williams', 'davidwilliams@example.com', '0523456789', '2018-07-14'),
-('Emma', 'Jones', 'emmajones@example.com', '0548765432', '2017-09-18'),
-('Daniel', 'Garcia', 'danielgarcia@example.com', '0534567890', '2021-03-22'),
-('Sophia', 'Martinez', 'sophiamartinez@example.com', '0545678901', '2020-11-12'),
-('Olivia', 'Hernandez', 'oliviahernandez@example.com', '0529876543', '2019-02-25'),
-('Noah', 'Lopez', 'noahlopez@example.com', '0538765432', '2022-06-10');
+('Boblo', 'Escabob', 'bobthecool@yahoo.com', '0521234567', '2021-05-15'),
+('Israel', 'Israeli', 'israelyay@walla.com', '0539876543', '2020-08-20'),
+('dima', 'dimitry', 'rudmit@inbox.ru', '0541239876', '2019-11-01'),
+('David', 'Reuveni', 'princessbubblegum@gmail.com', '0522345678', '2022-01-30'),
+('Freddy', 'Williams', 'killerxx420@yahoo.com', '0523456789', '2018-07-14'),
+('Emma', 'Jones', 'emmav1@gmail.com', '0548765432', '2017-09-18'),
+('Daniel', 'Danieli', 'Danielim@yahoo.com', '0534567890', '2021-03-22'),
+('Yotam', 'Kasam', 'Kasi5678@gmail.com', '0545678901', '2020-11-12'),
+('Clark', 'Kent', 'Superman360@gmail.com', '0529876543', '2019-02-25'),
+('Gaara', 'Sand', 'sandlover5545@gmail.com', '0538765432', '2022-06-10');
 
 ```
 
